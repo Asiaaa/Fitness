@@ -43,7 +43,7 @@ public class DefaultController extends HttpServlet {
     }
     else
     {
-        out.print("Jakis shit...");
+        out.print("Jakies cos...");
     }
        
 }
