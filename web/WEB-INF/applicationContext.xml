@@ -8,17 +8,19 @@
        http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.1.xsd
        http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.1.xsd">
 
-    <!--bean id="propertyConfigurer"
+ <bean id="propertyConfigurer"
           class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer"
-          p:location="/WEB-INF/jdbc.properties" />
+          p:location="/spring/jdbc.properties" />
 
-<bean id="dataSource"
+ <!--<bean id="corporateEventDao" class="com.example.JdbcCorporateEventDao">
+        <property name="dataSource" ref="dataSource"/>
+</bean> -->
+
+<bean id="DataSource"
     class="org.springframework.jdbc.datasource.DriverManagerDataSource"
     p:driverClassName="${jdbc.driverClassName}"
     p:url="${jdbc.url}"
     p:username="${jdbc.username}"
-    p:password="${jdbc.password}" /-->
-
-    <!-- ADD PERSISTENCE SUPPORT HERE (jpa, hibernate, etc) -->
+    p:password="${jdbc.password}" />
 
 </beans>

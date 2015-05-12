@@ -24,4 +24,12 @@
     <welcome-file-list>
         <welcome-file>redirect.jsp</welcome-file>
     </welcome-file-list>
+    <servlet>
+    <servlet-name>Imie</servlet-name>
+    <servlet-class>Controller.DefaultController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Imie</servlet-name>
+    <url-pattern>/imie</url-pattern>
+  </servlet-mapping>
 </web-app>
