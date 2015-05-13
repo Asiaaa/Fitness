@@ -14,15 +14,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import Model.Uzytkownik;
-import Model.Mail;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.mail.MessagingException;
 import javax.sql.DataSource;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Configurable;
-import org.springframework.context.annotation.ImportResource;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.context.support.SpringBeanAutowiringSupport;
 /**
@@ -30,6 +27,7 @@ import org.springframework.web.context.support.SpringBeanAutowiringSupport;
  * @author Joanna
  */
 
+// KONTROLER TESTOWY
 
 @Controller
 //@ImportResource("/WEB-INF/dispatcher-servlet.xml")
