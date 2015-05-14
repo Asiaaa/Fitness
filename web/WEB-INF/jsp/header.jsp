@@ -11,18 +11,18 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Welcome</title>
+        <title>Fitness</title>
         <link rel="stylesheet" href="css/main.css"/>
     </head>
 
     <body>
     <nav>
-        <h1>Salon Fitness</h1>
+        <h1><a href="index.htm">Salon Fitness</a></h1>
         <div id="menu_top">
             <h3>
-            <a>Oferta | </a>
-            <A href="register.htm">Other JSP</A>
-            <a>Logowanie</a>
+                <a href="oferta.htm">Oferta | </a>
+            <a href="register.htm">Rejestracja | </a>
+            <a href="login.htm">Logowanie</a>
             </h3>
         </div>
     </nav>
