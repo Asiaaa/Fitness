@@ -26,11 +26,10 @@ public class Uzytkownik {
     private String nazwisko;
     private String email;
     private String telefon;
-    private String opis;
     private String rola;
     
-    private JdbcTemplate jdbcTemplate;
-    private DataSource dataSource;
+    protected JdbcTemplate jdbcTemplate;
+    protected DataSource dataSource;
 
     public void setDataSource(DataSource dataSource) {
         this.dataSource=dataSource;
@@ -96,16 +95,7 @@ public class Uzytkownik {
     {
         return this.telefon;
     }
-    
-    public void setOpis(String opis)
-    {
-        this.opis=opis;
-    }
-    
-    public String getOpis()
-    {
-        return this.opis;
-    }
+   
     
     public void setRola(String rola)
     {
@@ -117,11 +107,10 @@ public class Uzytkownik {
         return this.rola;
     }
     
-    public void DodajPracownika(String login, String haslo, String imie, String nazwisko, String email, String telefon,
-            String opis)
+    public void DodajPracownika(String login, String haslo, String imie, String nazwisko, String email, String telefon)
     {
         jdbcTemplate.update("INSERT INTO UZYTKOWNIK (LOGIN, HASLO, IMIE, NAZWISKO, EMAIL, TELEFON, OPIS, ROLA)" + "VALUES(?,?,?,?,?,?,?,?)",
-        new Object[] { login, haslo, imie, nazwisko, email, telefon, opis, "pracownik" });
+        new Object[] { login, haslo, imie, nazwisko, email, telefon, null, "pracownik" });
     }
     
     public void UsunPracownika(int id_pracownik)
@@ -129,11 +118,10 @@ public class Uzytkownik {
         jdbcTemplate.update("DELETE FROM UZYTKOWNIK WHERE ID_UZYTKOWNIK=?", new Object[] {id_pracownik});
     }
     
-    public void EdytujPracownika(int id_pracownik, String login, String haslo, String imie, String nazwisko, String email, String telefon,
-            String opis)
+    public void EdytujPracownika(int id_pracownik, String login, String haslo, String imie, String nazwisko, String email, String telefon)
     {
         jdbcTemplate.update("UPDATE UZYTKOWNIK SET LOGIN=?, HASLO=?, IMIE=?, NAZWISKO=?, EMAIL=?, TELEFON=?, OPIS=? WHERE ID_UZYTKOWNIK=?",
-        new Object[] { login, haslo, imie, nazwisko, email, telefon, opis, id_pracownik });
+        new Object[] { login, haslo, imie, nazwisko, email, telefon, null, id_pracownik });
     }
     
     public void UsunKlienta(int id_klient)
@@ -146,10 +134,10 @@ public class Uzytkownik {
         // uzycie f-cji get
     }
     
-    public void rejestracja(String login, String haslo, String imie, String nazwisko, String email, String telefon, String opis)
+    public void rejestracja(String login, String haslo, String imie, String nazwisko, String email, String telefon)
     {
         jdbcTemplate.update("INSERT INTO UZYTKOWNIK (LOGIN, HASLO, IMIE, NAZWISKO, EMAIL, TELEFON, OPIS, ROLA)" + "VALUES(?,?,?,?,?,?,?,?)",
-        new Object[] { login, haslo, imie, nazwisko, email, telefon, opis, "klient" });
+        new Object[] { login, haslo, imie, nazwisko, email, telefon, null, "klient" });
     } // wstawienie klienta?
     
     /*public List<Grafik> WyswietlGrafik()
