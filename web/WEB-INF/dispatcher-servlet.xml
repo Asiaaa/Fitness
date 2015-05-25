@@ -48,7 +48,6 @@
         class="org.springframework.web.servlet.mvc.ParameterizableViewController"
         p:viewName="login"/>
     
-    
 
 </beans>
 
