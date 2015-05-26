@@ -59,3 +59,37 @@ nav a:hover{
     border-left: 1px solid #888;
     padding-left: 10px;
 }
+
+#grafik {
+    width: 100%;
+    border: solid #d0ed45 2px;
+}
+
+#grafik td{
+    height: 50px;
+    width:  14%;
+    outline: solid #d0ed45 2px;
+    text-align: center;
+    background-color: grey;
+}
+
+form input{
+    color: #633; 
+       font-size: 10px; 
+       background-color: #ebebd9; 
+       padding: 3px; 
+       border: double 3px orange 
+    
+}
+
+#formularz{
+    font-size: larger;
+    border-radius: 5px;
+}
+
+#formularz input{
+    font-size: medium;
+    border-radius: 5px;
+    padding: 5px;
+    margin: 2px;
+}
