@@ -1,3 +1,12 @@
+<%@page import="org.springframework.context.annotation.ImportResource"%>
+<%@page import="org.springframework.jdbc.datasource.DriverManagerDataSource"%>
+<%@page import="org.springframework.beans.factory.xml.XmlBeanFactory"%>
+<%@page import="org.springframework.beans.factory.BeanFactory"%>
+<%@page import="org.springframework.core.io.Resource"%>
+<%@page import="org.springframework.core.io.ClassPathResource"%>
+<%@page import="org.springframework.context.ApplicationContextAware"%>
+<%@page import="org.springframework.context.support.ClassPathXmlApplicationContext"%>
+<%@page import="org.springframework.context.ApplicationContext"%>
 <%@page import="javax.naming.InitialContext"%>
 <%@page import="javax.naming.Context"%>
 <%@page import="org.springframework.beans.factory.annotation.Autowired"%>
@@ -24,26 +33,33 @@
         <TH align="center" valign="middle">Sobota</TH>
         <TH align="center" valign="middle">Niedziela</TH>
     </TR>
-    <c:forEach begin="8" end="21" step="1" var="time">
+  <%-- <c:forEach begin="8" end="21" step="1" var="time">
     <TR>
         <TD align="center" valign="middle" width="80">
         <c:out value="${time}" />:00
-        </TD>
+        </TD>--%>
         <%
-            
-            //Grafik_fitness gr = new Grafik_fitness();
-            //gr.setDataSource(datasource);
-            //List<Grafik_fitness> grafik = gr.getAll();
-            
-            for(int i=0; i<7; i++)
+            for(int time=8; time<21; time++)
             {
+                out.println("<tr>");
                 out.println("<td align=center valign=middle width=100>");
-                    //for(Grafik_fitness x : grafik){
+                out.println(time+":00");
+                out.println("</td>");
+                for(int day=0; day<7; day++)
+                {
+                    out.println("<td align=center valign=middle width=100>");
+                    //for(Grafik_fitness day : grafik){
                       //  out.println(x.getGodzStart());
                     //}
                 out.println("</td>");
-            }  
-            
+                }
+                out.println("</tr>");
+                
+            }
+            //Grafik_fitness gr = new Grafik_fitness();
+            //gr.setDataSource(ds);
+            //List<Grafik_fitness> grafik = gr.getAll();
+          
             
             
             %>
@@ -60,8 +76,7 @@
         </c:forEach>
         </TD>
         </c:forEach>--%>
-    </TR>
-</c:forEach>
+   
 </TBODY>
 </TABLE>
 </div>
