@@ -15,12 +15,15 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 /**
  *
  * @author Joanna
  */
 @Controller
+@EnableWebMvc
 public class registerController {
     @Autowired
     private DataSource dataSource;
@@ -32,12 +35,10 @@ public class registerController {
    
    @RequestMapping(value = "/register.htm", method = RequestMethod.POST)
    public String addStudent(@ModelAttribute("SpringWeb")Uzytkownik user, 
-   ModelMap model) {
-      model.addAttribute("command", user);
+    final RedirectAttributes redirectAttributes) {
       user.setDataSource(dataSource);
       user.rejestracja();
-      
-      //return "register";
+      redirectAttributes.addFlashAttribute("message", "Zarejestrowano! Możesz się zalogować :)");
       return "redirect:/login.htm";
    }
     

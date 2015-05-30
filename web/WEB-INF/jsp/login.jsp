@@ -11,6 +11,7 @@
         <div id="con_left">
         <div id="formularz" style="margin-left: 50px">
             <h2>Logowanie</h2>
+            <h3>${message}</h3>
         <form action="<c:url value='/j_spring_security_check' />" method='POST'>
             <table>
             <tr><td>Login: </td><td><input type="text" name="j_username" value="" /></td></tr>
