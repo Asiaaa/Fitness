@@ -21,11 +21,8 @@
             <props>
                 <prop key="index.htm">indexController</prop>
                 <prop key="oferta.htm">ofertaController</prop>
-                <prop key="register.htm">registerController</prop>
+                <prop key="register*">registerController</prop>
                 <prop key="login.htm">loginController</prop>
-                <prop key="index_logged_staff.htm">index_logged_staffController</prop>
-                <prop key="index_logged_admin.htm">index_logged_adminController</prop>
-                <prop key="index_logged_user.htm">index_logged_userController</prop>
                 <prop key="grafik.htm">grafikController</prop>
             </props>
         </property>
@@ -42,24 +39,15 @@
     <bean name="indexController"
           class="org.springframework.web.servlet.mvc.ParameterizableViewController"
           p:viewName="index" />
-    <bean name="ofertaController"
+        <bean name="ofertaController"
         class="org.springframework.web.servlet.mvc.ParameterizableViewController"
         p:viewName="oferta"/>
-    <bean name="registerController"
+<!--    <bean name="registerController"
         class="org.springframework.web.servlet.mvc.ParameterizableViewController"
-        p:viewName="register"/>
+        p:viewName="register"/>-->
     <bean name="loginController"
         class="org.springframework.web.servlet.mvc.ParameterizableViewController"
         p:viewName="login"/>
-    <bean name="index_logged_adminController"
-        class="org.springframework.web.servlet.mvc.ParameterizableViewController"
-        p:viewName="index_logged_admin"/>
-    <bean name="index_logged_staffController"
-        class="org.springframework.web.servlet.mvc.ParameterizableViewController"
-        p:viewName="index_logged_staff"/>
-    <bean name="index_logged_userController"
-        class="org.springframework.web.servlet.mvc.ParameterizableViewController"
-        p:viewName="index_logged_user"/>
     <bean name="grafikController"
         class="org.springframework.web.servlet.mvc.ParameterizableViewController"
         p:viewName="grafik"/>

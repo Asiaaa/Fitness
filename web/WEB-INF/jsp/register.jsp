@@ -1,5 +1,6 @@
 <%@include file="header.jsp" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>   
 <div id="context">
     <div id="con_left">
@@ -7,17 +8,18 @@
         <div id="formularz" style="margin-left: 50px">
             <h2>Rejestracja</h2>
        <table>
-        <form>
-            <tr><td>login: </td><td><input type="text" name="login" value="" /></td></tr>
-            <tr><td>hasło: </td><td><input type="password" name="haslo" value="" /></td></tr>
-            <tr><td>Imie: </td><td><input type="text" name="imie" value="" /></td></tr>
-            <tr><td>Nazwisko: </td><td><input type="text" name="nazwisko" value="" /></td></tr>
-            <tr><td>email: </td><td><input type="text" name="email" value="" /></td></tr>
-            <tr><td>telefon: </td><td><input type="text" name="telefon" value="" /></td></tr>
+        <form:form method="POST" action="register.htm">
+            <tr><td><form:label path="login">Login: </form:label> </td><td><form:input path="login" /></td></tr>
+            <tr><td><form:label path="haslo">Hasło: </form:label></td><td><form:input path="haslo" /></td></tr>
+            <tr><td><form:label path="imie">Imię: </form:label></td><td><form:input path="imie" /></td></tr>
+            <tr><td><form:label path="nazwisko">Nazwisko: </form:label></td><td><form:input path="nazwisko" /></td></tr>
+            <tr><td><form:label path="email">Email: </form:label></td><td><form:input path="email" /></td></tr>
+            <tr><td><form:label path="telefon">Telefon: </form:label></td><td><form:input path="telefon" /></td></tr>
             <tr><td><input type="submit" value="Wyślij" /></td></tr>
-        </form>
+         </form:form>
         </table>
         </div>
+            ${imie}
         <%--<form:form modelAttribute="Uzytkownik" method="post">
             <table border="0">
                 <tr><td>Login:</td><td><form:input path="login"/></td></tr>

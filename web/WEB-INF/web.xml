@@ -11,7 +11,7 @@
     <servlet>
         <servlet-name>dispatcher</servlet-name>
         <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
-        <load-on-startup>2</load-on-startup>
+        <load-on-startup>1</load-on-startup>
     </servlet>
     <servlet-mapping>
         <servlet-name>dispatcher</servlet-name>
@@ -25,14 +25,14 @@
     <welcome-file-list>
         <welcome-file>redirect.jsp</welcome-file>
     </welcome-file-list>
-    <servlet>
+<!--    <servlet>
         <servlet-name>Imie</servlet-name>
         <servlet-class>Controller.DefaultController</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>Imie</servlet-name>
         <url-pattern>/imie</url-pattern>
-    </servlet-mapping>
+    </servlet-mapping>-->
     
     <!-- <context-param>
      <param-name>contextConfigLocation</param-name>

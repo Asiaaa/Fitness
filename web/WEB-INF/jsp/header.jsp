@@ -19,7 +19,7 @@
 
     <body>
     <nav>
-        <h1><a href="index.htm">Salon Fitness</a></h1>
+        <h1><a href="index.htm">Studio Fitness</a></h1>
         <div id="menu_top">
             <h3>
                 <a href="oferta.htm">Oferta | </a>

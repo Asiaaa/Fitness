@@ -19,6 +19,7 @@
     
 
  <context:component-scan base-package="Controller" />
+ 
  <bean id="propertyConfigurer"
           class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer"
           p:location="/spring/jdbc.properties" />
@@ -60,6 +61,7 @@
     <security:http pattern="/css/*" security="none" /> 
     <security:http auto-config="true" use-expressions="true">
     <security:intercept-url pattern="/login.htm*" access="permitAll" />
+    <security:intercept-url pattern="/register.htm*" access="permitAll" />
     <security:intercept-url pattern="/index.htm*" access="permitAll" />
     <security:intercept-url pattern="/grafik.htm*" access="permitAll" />
     <security:intercept-url pattern="/zajecia.htm*" access="permitAll" />

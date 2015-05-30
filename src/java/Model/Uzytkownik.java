@@ -91,7 +91,7 @@ public class Uzytkownik {
         this.telefon=telefon;
     }
     
-    public String getTelefon(String telefon)
+    public String getTelefon()
     {
         return this.telefon;
     }
@@ -134,11 +134,11 @@ public class Uzytkownik {
         // uzycie f-cji get
     }
     
-    public void rejestracja(String login, String haslo, String imie, String nazwisko, String email, String telefon)
+    public void rejestracja()
     {
-        jdbcTemplate.update("INSERT INTO UZYTKOWNIK (LOGIN, HASLO, IMIE, NAZWISKO, EMAIL, TELEFON, OPIS, ROLA)" + "VALUES(?,?,?,?,?,?,?,?)",
-        new Object[] { login, haslo, imie, nazwisko, email, telefon, null, "klient" });
-    } // wstawienie klienta?
+        jdbcTemplate.update("call rejestracja(?,?,?,?,?,?)",
+        new Object[] { login, haslo, imie, nazwisko, email, telefon});
+    }
     
     /*public List<Grafik> WyswietlGrafik()
     {
