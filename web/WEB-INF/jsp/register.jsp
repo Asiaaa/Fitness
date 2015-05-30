@@ -6,7 +6,7 @@
         
         <div id="formularz" style="margin-left: 50px">
             <h2>Rejestracja</h2>
-        <table>
+       <table>
         <form>
             <tr><td>login: </td><td><input type="text" name="login" value="" /></td></tr>
             <tr><td>hasło: </td><td><input type="password" name="haslo" value="" /></td></tr>
