@@ -28,8 +28,8 @@
             ale przede wszystkim przyjemny :)
     </div>
     <div id='con_right'>
-        <h2>Menu boczne</h2>
-        Tutaj będą jakieś zdjęcia, albo dodatkowe informacje, albo dodatkowe menu.
+        <h2>Promocja</h2>
+        Oferujemy zniżki dla studentów: <b>do -40%</b>
     </div>
 </div>
     </body>

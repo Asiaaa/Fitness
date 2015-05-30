@@ -22,7 +22,8 @@
             <h3>
                 <a href="oferta.htm">Oferta | </a>
             <a href="register.htm">Rejestracja | </a>
-            <a href="login.htm">Logowanie</a>
+            <a href="login.htm">Logowanie</a> | 
+            <a href="grafik.htm">Grafik</a>
             </h3>
         </div>
     </nav>

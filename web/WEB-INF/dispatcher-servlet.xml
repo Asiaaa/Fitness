@@ -26,6 +26,7 @@
                 <prop key="index_logged_staff.htm">index_logged_staffController</prop>
                 <prop key="index_logged_admin.htm">index_logged_adminController</prop>
                 <prop key="index_logged_user.htm">index_logged_userController</prop>
+                <prop key="grafik.htm">grafikController</prop>
             </props>
         </property>
     </bean>
@@ -59,6 +60,9 @@
     <bean name="index_logged_userController"
         class="org.springframework.web.servlet.mvc.ParameterizableViewController"
         p:viewName="index_logged_user"/>
+    <bean name="grafikController"
+        class="org.springframework.web.servlet.mvc.ParameterizableViewController"
+        p:viewName="grafik"/>
     
 
 </beans>
