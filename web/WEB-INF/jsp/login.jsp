@@ -1,6 +1,6 @@
 <%-- 
-    Document   : index_logged
-    Created on : 2015-05-24, 20:38:10
+    Document   : login
+    Created on : 2015-05-25, 20:37:06
     Author     : Joanna
 --%>
 
@@ -12,9 +12,6 @@
         <title>JSP Page</title>
     </head>
     <body>
-             <h1>Pomyślnie zalogowano!</h1>
-            
-           Możesz się wylogować:
-         <a href="j_spring_security_logout" />  Logout </a>
+        <h1>Logowanie</h1>
     </body>
 </html>

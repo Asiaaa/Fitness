@@ -149,10 +149,10 @@ public class Uzytkownik {
     {
         Mail message = new Mail(adresat, temat, wiadomosc);
         message.send();
-    } // coś nie idzie...
+    } 
  
     
-    /*public List<Uzytkownik> select_users_base_test() // testowe - wyswietla wszystkich uzytkownikow
+    public List<Uzytkownik> select_users_base_test() // testowe - wyswietla wszystkich uzytkownikow
     {
         List<Uzytkownik> users = this.jdbcTemplate.query(
         "select imie, nazwisko from uzytkownik",
@@ -166,7 +166,7 @@ public class Uzytkownik {
             }
         });
         return users;
-    }*/
+    }
     
     
     

@@ -22,6 +22,7 @@
                 <prop key="index.htm">indexController</prop>
                 <prop key="oferta.htm">ofertaController</prop>
                 <prop key="register.htm">registerController</prop>
+                <prop key="login.htm">loginController</prop>
                 <prop key="index_logged_staff.htm">index_logged_staffController</prop>
                 <prop key="index_logged_admin.htm">index_logged_adminController</prop>
                 <prop key="index_logged_user.htm">index_logged_userController</prop>
@@ -46,6 +47,9 @@
     <bean name="registerController"
         class="org.springframework.web.servlet.mvc.ParameterizableViewController"
         p:viewName="register"/>
+    <bean name="loginController"
+        class="org.springframework.web.servlet.mvc.ParameterizableViewController"
+        p:viewName="login"/>
     <bean name="index_logged_adminController"
         class="org.springframework.web.servlet.mvc.ParameterizableViewController"
         p:viewName="index_logged_admin"/>

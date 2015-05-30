@@ -13,13 +13,9 @@
     </head>
     <body>
         <h1>Pomyślnie zalogowano!</h1>
-     <form-login
-        authentication-failure-url="/secure/loginAdmin.do?error=true"
-        login-page="/secure/loginAdmin.do" />
             
            Możesz się wylogować:
          <a href="j_spring_security_logout" />  Logout </a>
-    </form>
      
     </body>
 </html>

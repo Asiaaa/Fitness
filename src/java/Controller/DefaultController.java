@@ -57,8 +57,9 @@ public class DefaultController extends HttpServlet {
     Uzytkownik user = new Uzytkownik();
     Grafik silownia  = new Grafik();
     user.setDataSource(dataSource);
-    /*List <Uzytkownik> users = 
-            db.select_user();
+    
+    List <Uzytkownik> users = 
+            user.select_users_base_test();
     if(users!=null)
     {
     for(Uzytkownik x: users)
@@ -69,14 +70,6 @@ public class DefaultController extends HttpServlet {
     else
     {
         out.print("Jakies cos...");
-    }*/
-       /* try {
-            //user.DodajPracownika("asia", "asia", "Joanna", "Wolna", "asia@interia.pl", "888-888-888", "Sprzataczka :P");
-            //user.UsunPracownika(3);
-            //user.EdytujPracownika(1, "knowakowska", "knowakowska", "Karolina", "Nowakowska", "knowakowska", "555-555-555", null);
-            user.WyslijEmail("joanna.wolna@ymail.com", "Hello", "Pierwsza wiadomosc");
-        } catch (MessagingException ex) {
-            Logger.getLogger(DefaultController.class.getName()).log(Level.SEVERE, null, ex);
-        }*/
+    }
 }
 }
