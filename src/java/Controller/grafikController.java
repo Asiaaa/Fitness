@@ -6,6 +6,7 @@
 
 package Controller;
 
+import Model.Grafik;
 import Model.Grafik_fitness;
 import java.util.List;
 import javax.sql.DataSource;
@@ -31,7 +32,17 @@ public class grafikController {
       ModelAndView model = new ModelAndView("grafik");
       Grafik_fitness grafik = new Grafik_fitness();
       grafik.setDataSource(dataSource);
-      List<Grafik_fitness> grafik_list = grafik.getAll();
+      List<Grafik_fitness> grafik_list = grafik.getAll();     
+      model.addObject("grafikLista", grafik_list);
+      return model;
+   }
+   
+   @RequestMapping(value = "/grafik_silownia.htm", method = RequestMethod.GET)
+   public ModelAndView grafik_silownia() {
+      ModelAndView model = new ModelAndView("grafik_silownia");
+      Grafik grafik = new Grafik();
+      grafik.setDataSource(dataSource);
+      List<Grafik> grafik_list = grafik.WyswietlGrafik();
       
       model.addObject("grafikLista", grafik_list);
       return model;

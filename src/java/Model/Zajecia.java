@@ -26,6 +26,8 @@ public class Zajecia {
     private int id_stopien_trudnosci;
     private String opis;
     private String stopien_trudnosci;
+    private String stopien;
+    
     
     protected JdbcTemplate jdbcTemplate;
     protected DataSource dataSource;
@@ -82,11 +84,26 @@ public class Zajecia {
         return this.id_zajecia;
     }
     
-    public void setStopienTrudnosci(String st){
-        this.stopien_trudnosci=st;
+    public void setStopienTrudnosci(int st){
+        this.id_stopien_trudnosci=st;
     }
-    public String getStopienTrudnosci(){
-        return this.stopien_trudnosci;
+    public int getStopienTrudnosci(){
+        return this.id_stopien_trudnosci;
+    }
+    
+    public void setStopien(String stopien)
+    {
+        this.stopien=stopien;
+    }
+    
+    public String getStopien()
+    {
+        return stopien;
+    }
+    
+    public int getId()
+    {
+        return id_zajecia;
     }
     
     public void DodajZajecia()
@@ -101,30 +118,47 @@ public class Zajecia {
        jdbcTemplate.update("DELETE FROM ZAJECIA WHERE ID_ZAJECIA=?", new Object[] {id_zajecia});
     }
     
-    public void EdytujZajecia(int id_zajecia, String nazwa, Time czas_trwania, int id_stopien_trudnosci, String opis)
+    public void EdytujZajecia(int id_zajecia)
     {
         jdbcTemplate.update("UPDATE ZAJECIA SET NAZWA=?, CZAS_TRWANIA=?, ID_STOPIEN_TRUDNOSCI=?, OPIS=? WHERE ID_ZAJECIA=?",
         new Object[] { nazwa, czas_trwania, id_stopien_trudnosci, opis, id_zajecia });
     }
     
+    
     public List<Zajecia> WyswietlZajecia()
     {
         List<Zajecia> zajeciaa = this.jdbcTemplate.query(
-        "select * from zajecia",
+        "select z.*, s.nazwa from zajecia z inner join stopien_trudnosci s on s.id_stopien_trudnosci=z.id_stopien_trudnosci",
         new RowMapper<Zajecia>() {
                 @Override
                 public Zajecia mapRow(ResultSet rs, int rowNum) throws SQLException {
                 Zajecia zajecia = new Zajecia();
                 zajecia.id_zajecia=rs.getInt("id_zajecia");
-                zajecia.setNazwa(rs.getString("nazwa"));
+                zajecia.setNazwa(rs.getString("z.nazwa"));
                 zajecia.setCzasTrwania(rs.getTime("czas_trwania"));
-                zajecia.setIdStopienTrudnosci(rs.getInt("id_stopien_trudnosci"));
+                zajecia.setStopien(rs.getString("s.nazwa"));
                 zajecia.setOpis(rs.getString("opis"));
                 return zajecia;
             }
         });
         return zajeciaa;
-    }  
+    } 
+    
+    public List<Zajecia> PobierzStopnie()
+    {
+        List<Zajecia> zajeciaa = this.jdbcTemplate.query(
+        "select id_stopien_trudnosci, nazwa from stopien_trudnosci",
+        new RowMapper<Zajecia>() {
+                @Override
+                public Zajecia mapRow(ResultSet rs, int rowNum) throws SQLException {
+                Zajecia zajecia = new Zajecia();
+                zajecia.setStopienTrudnosci(rs.getInt("id_stopien_trudnosci"));
+                zajecia.setStopien(rs.getString("nazwa"));
+                return zajecia;
+            }
+        });
+        return zajeciaa;
+    }
     
     public List<Zajecia> WyswietlZajeciaView()
     {
@@ -137,11 +171,31 @@ public class Zajecia {
                 zajecia.id_zajecia=rs.getInt("id_zajecia");
                 zajecia.setNazwa(rs.getString("nazwa"));
                 zajecia.setCzasTrwania(rs.getTime("czas_trwania"));
-                zajecia.setStopienTrudnosci(rs.getString("stopien_trudnosci"));
+                zajecia.setStopien(rs.getString("stopien_trudnosci"));
                 zajecia.setOpis(rs.getString("opis"));
                 return zajecia;
             }
         });
         return zajeciaa;
     } 
+    
+    public Zajecia WyswietlZajecia(int id)
+    {
+         Zajecia zajecia = (Zajecia)this.jdbcTemplate.queryForObject(
+        "select z.*, s.nazwa from zajecia z inner join stopien_trudnosci s on s.id_stopien_trudnosci=z.id_stopien_trudnosci"
+                + " where id_zajecia=?", new Object[] {id},
+        new RowMapper<Zajecia>() {
+            @Override
+            public Zajecia mapRow(ResultSet rs, int rowNum) throws SQLException {
+                Zajecia zajecia = new Zajecia();
+                zajecia.id_zajecia=rs.getInt("id_zajecia");
+                zajecia.setNazwa(rs.getString("z.nazwa"));
+                zajecia.setCzasTrwania(rs.getTime("czas_trwania"));
+                zajecia.setStopien(rs.getString("s.nazwa"));
+                zajecia.setOpis(rs.getString("opis"));
+                return zajecia;
+            }
+        });
+         return zajecia;
+    }
 }

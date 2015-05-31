@@ -30,6 +30,7 @@
                 <prop key="zajecia*">zajeciaController</prop>
                 <prop key="panel_admina.*">panel_adminaController</prop>
                 <prop key="zarzadzaj_uzytkownicy.* edytuj_uzytkownika.* usun_uzytkownika.*">zarzadzaj_uzytkownikamiController</prop>
+                <prop key="zarzadzaj_zajecia.* edytuj_zajecia.* usun_zajecia.*">zarzadzaj_zajeciamiController</prop>
             </props>
         </property>
     </bean>
@@ -54,6 +55,7 @@
     <bean name="loginController"
         class="org.springframework.web.servlet.mvc.ParameterizableViewController"
         p:viewName="login"/>
+
     <bean name="grafikController"
         class="org.springframework.web.servlet.mvc.ParameterizableViewController"
         p:viewName="grafik"/>
@@ -63,7 +65,9 @@
     <bean name="zarzadzaj_uzytkownikamiController"
         class="org.springframework.web.servlet.mvc.ParameterizableViewController"
         p:viewName="zarzadzaj_uzytkownicy"/>
-    
+    <bean name="zarzadzaj_zajeciamiController"
+        class="org.springframework.web.servlet.mvc.ParameterizableViewController"
+        p:viewName="zarzadzaj_zajecia"/>
 
 </beans>
 

@@ -21,7 +21,7 @@
         <div id="linki" style="margin-left: 50px">
             <h1>Zarządzaj</h1><br><br><br>
             <a href="zarzadzaj_uzytkownicy.htm">Użytkownicy </a><br><br>
-            <a href="oferta.htm">Zajęcia </a><br><br>
+            <a href="zarzadzaj_zajecia.htm">Zajęcia </a><br><br>
             <a href="oferta.htm">Grafik fitness </a><br><br>
             <a href="oferta.htm">Grafik siłownia </a><br><br>
         </div>     

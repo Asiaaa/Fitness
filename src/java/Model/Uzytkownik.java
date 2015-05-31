@@ -134,6 +134,7 @@ public class Uzytkownik {
         return this.id_uzytkownik;
     }
     
+
     public void DodajPracownika(String login, String haslo, String imie, String nazwisko, String email, String telefon)
     {
         jdbcTemplate.update("INSERT INTO UZYTKOWNIK (LOGIN, HASLO, IMIE, NAZWISKO, EMAIL, TELEFON, OPIS, ROLA)" + "VALUES(?,?,?,?,?,?,?,?)",

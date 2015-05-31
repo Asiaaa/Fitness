@@ -26,11 +26,10 @@
            
         <c:forEach items="${grafikLista}" var="clazz">
         <c:if test="${clazz.getGodzStart() <= time 
-        && clazz.getGodzKoniec() > time 
-        && clazz.getIdDzienTygodnia() == day}">
-            <div id="linki" > 
-            <a href="#"><c:out value="${clazz.getZajecia()}" /></a> <%--musimy linkowac do rezerwacji--%>
-            </div>
+        && clazz.getGodzEnd() > time 
+        && clazz.getDzienTygodnia() == day}">
+              
+        <c:out value="${clazz.getNazwisko()}" />
         </c:if>
         </c:forEach>
         </TD>
