@@ -23,21 +23,8 @@
         </session-timeout>
     </session-config>
     <welcome-file-list>
-        <welcome-file>redirect.jsp</welcome-file>
+        <welcome-file>index.htm</welcome-file>
     </welcome-file-list>
-<!--    <servlet>
-        <servlet-name>Imie</servlet-name>
-        <servlet-class>Controller.DefaultController</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>Imie</servlet-name>
-        <url-pattern>/imie</url-pattern>
-    </servlet-mapping>-->
-    
-    <!-- <context-param>
-     <param-name>contextConfigLocation</param-name>
-     <param-value>/WEB-INF/applicationContext.xml</param-value>
-     </context-param>-->
  
     <filter>
     <filter-name>springSecurityFilterChain</filter-name>
@@ -48,5 +35,6 @@
     <filter-name>springSecurityFilterChain</filter-name>
     <url-pattern>/*</url-pattern>
     </filter-mapping>
+
     
 </web-app>

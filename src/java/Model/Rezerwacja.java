@@ -108,8 +108,7 @@ public class Rezerwacja {
         return id_typ_zajec;
     }
     
-   public void DodajRezerwacje(int id_grafik_silownia, int id_grafik_fitness, int id_klient, Date data,
-           Time godz_start, Time godz_koniec, int id_typ_zajec)
+   public void DodajRezerwacje()
    {
        jdbcTemplate.update("INSERT INTO REZERWACJS (ID_GRAFIK_FITNESS, ID_GRAFIK_SILOWNIA, ID_KLIENT, DATA, GODZ_START"
                + "GODZ_KONIEC, ID_TYP_ZAJEC)" + "VALUES(?,?,?,?,?,?,?)",

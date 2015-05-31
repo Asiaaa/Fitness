@@ -19,7 +19,7 @@
 
     <body>
     <nav>
-        <h1><a href="index.htm">Studio Fitness</a></h1>
+        <h1><a href="index.htm">Fitness Club</a></h1>
         <div id="menu_top">
             <h3>
                 <a href="oferta.htm">Oferta | </a>
@@ -39,6 +39,9 @@
             </security:authorize>
             <security:authorize access="hasRole('ROLE_STAFF')">
             <a href="<c:url value='/admin' />">Zarządzaj</a> | 
+            </security:authorize>
+             <security:authorize access="hasRole('ROLE_INSTRUCTOR')">
+            <a href="<c:url value='/admin' />">Mój grafik</a> | 
             </security:authorize>
             <security:authorize access="isAuthenticated()">
             <a href="<c:url value='/j_spring_security_logout' />">  Wyloguj</a> | 

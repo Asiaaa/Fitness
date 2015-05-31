@@ -74,7 +74,7 @@ public class Zajecia {
         return opis;
     }
     
-    public void DodajZajecia(String nazwa, Time czas_trwania, int id_stopien_trudnosci, String opis)
+    public void DodajZajecia()
     {
         jdbcTemplate.update("INSERT INTO ZAJECIA (NAZWA, CZAS_TRWANIA, ID_STOPIEN_TRUDNOSCI, OPIS)" + "VALUES(?,?,?,?)",
         new Object[] { nazwa, czas_trwania, id_stopien_trudnosci, opis});
