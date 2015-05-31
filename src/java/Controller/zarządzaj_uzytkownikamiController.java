@@ -39,13 +39,28 @@ public class zarządzaj_uzytkownikamiController {
    }
    
    @RequestMapping(value = "/edytuj_uzytkownika.htm", method = RequestMethod.GET)
-   public String edytuj(@RequestParam("id")int id) {
-       return "index";
+   public ModelAndView edytuj(@RequestParam("id")int id) {
+       Uzytkownik user = new Uzytkownik();
+       user.setDataSource(dataSource);
+       return new ModelAndView("edit_user", "command", user.WyswietlUzytkownika(id));
+   }
+   
+   @RequestMapping(value = "/edytuj_uzytkownika.htm", method = RequestMethod.POST)
+   public String dodaj(@RequestParam("id")int id, @ModelAttribute("SpringWeb")Uzytkownik user) {
+       user.setDataSource(dataSource);
+       Uzytkownik tmp = user.WyswietlUzytkownika(id);
+       user.setHaslo(tmp.getHaslo());
+       user.EdytujUzytkownika(id);
+       user.EdytujRole(id);
+       return "redirect:/zarzadzaj_uzytkownicy.htm";
    }
    
    @RequestMapping(value = "/usun_uzytkownika.htm", method = RequestMethod.GET)
    public String usun(@RequestParam("id")int id) {
-       return "index";
+       Uzytkownik user = new Uzytkownik();
+       user.setDataSource(dataSource);
+       user.UsunUzytkownika(id);
+       return "redirect:/zarzadzaj_uzytkownicy.htm";
    }
     
 }

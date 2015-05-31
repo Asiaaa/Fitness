@@ -24,10 +24,10 @@
         <div id="menu_top">
             <h3>
                 <a href="oferta.htm">Oferta | </a>
-                <a href="grafik.htm">Zajęcia | </a>
+                <a href="zajecia.htm">Zajęcia | </a>
                 <a href="grafik.htm">Grafik | </a>
                 <a href="grafik.htm">Siłownia | </a>
-                <a href="grafik.htm">Kadra | </a>
+                <a href="kadra.htm">Kadra | </a>
             <security:authorize access="!isAuthenticated()">
             <a href="register.htm">Rejestracja | </a>
             <a href="login.htm">Logowanie</a>  

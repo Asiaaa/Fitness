@@ -125,6 +125,14 @@ public class Uzytkownik {
     {
         return this.opis;
     }
+
+    public void setIdUzytkownik(int id_uzytkownik){
+        this.id_uzytkownik = id_uzytkownik;
+    }
+    
+    public int getIdUzytkownik(){
+        return this.id_uzytkownik;
+    }
     
     public void DodajPracownika(String login, String haslo, String imie, String nazwisko, String email, String telefon)
     {
@@ -132,25 +140,61 @@ public class Uzytkownik {
         new Object[] { login, haslo, imie, nazwisko, email, telefon, null, "pracownik" });
     }
     
-    public void UsunPracownika(int id_pracownik)
+    public void UsunUzytkownika(int id_uzytkownik)
     {
-        jdbcTemplate.update("DELETE FROM UZYTKOWNIK WHERE ID_UZYTKOWNIK=?", new Object[] {id_pracownik});
+        jdbcTemplate.update("DELETE FROM UZYTKOWNIK WHERE ID_UZYTKOWNIK=?", new Object[] {id_uzytkownik});
     }
     
-    public void EdytujPracownika(int id_pracownik, String login, String haslo, String imie, String nazwisko, String email, String telefon)
+    public void EdytujUzytkownika(int id_uzytkownik)
     {
-        jdbcTemplate.update("UPDATE UZYTKOWNIK SET LOGIN=?, HASLO=?, IMIE=?, NAZWISKO=?, EMAIL=?, TELEFON=?, OPIS=? WHERE ID_UZYTKOWNIK=?",
-        new Object[] { login, haslo, imie, nazwisko, email, telefon, null, id_pracownik });
+        jdbcTemplate.update("UPDATE UZYTKOWNIK SET LOGIN=?, IMIE=?, NAZWISKO=?, EMAIL=?, TELEFON=?, OPIS=? WHERE ID_UZYTKOWNIK=?",
+        new Object[] { login, imie, nazwisko, email, telefon, opis, id_uzytkownik });
     }
     
-    public void UsunKlienta(int id_klient)
+   public void EdytujRole(int id_uzytkownik)
+   {
+       jdbcTemplate.update("UPDATE AUTORYZACJA SET ROLA=? WHERE ID_UZYTKOWNIK=?", new Object[] {rola, id_uzytkownik});
+   }
+    
+    
+    public Uzytkownik WyswietlUzytkownika(int id)
     {
-        jdbcTemplate.update("DELETE FROM UZYTKOWNIK WHERE ID_UZYTKOWNIK=?", new Object[] {id_klient});
+         Uzytkownik user = (Uzytkownik)this.jdbcTemplate.queryForObject(
+        "select u.*, a.rola from uzytkownik u inner join autoryzacja a on u.id_uzytkownik=a.id_uzytkownik"
+                + " where u.id_uzytkownik=?", new Object[] {id},
+        new RowMapper<Uzytkownik>() {
+            @Override
+            public Uzytkownik mapRow(ResultSet rs, int rowNum) throws SQLException {
+                Uzytkownik user = new Uzytkownik();
+                user.setId(rs.getInt("id_uzytkownik"));
+                user.setLogin(rs.getString("login"));
+                user.setHaslo(rs.getString("haslo"));
+                user.setImie(rs.getString("imie"));
+                user.setNazwisko(rs.getString("nazwisko"));
+                user.setEmail(rs.getString("email"));
+                user.setTelefon(rs.getString("telefon"));
+                user.setOpis(rs.getString("opis"));
+                user.setRola(rs.getString("rola"));
+                return user;
+            }
+        });
+        return user;
     }
     
-    public void WyswietlDane()
-    {
-        // uzycie f-cji get
+    public List<Uzytkownik> getAllKadra(){
+        List<Uzytkownik> users = this.jdbcTemplate.query(
+        "select imie, nazwisko, id_uzytkownik from uzytkownik where id_rola=2",
+        new RowMapper<Uzytkownik>() {
+            @Override
+            public Uzytkownik mapRow(ResultSet rs, int rowNum) throws SQLException {
+                Uzytkownik user = new Uzytkownik();
+                user.setImie(rs.getString("imie"));
+                user.setNazwisko(rs.getString("nazwisko"));
+                user.setIdUzytkownik(rs.getInt("id_uzytkownik"));
+                return user;
+            }
+        });
+        return users;
     }
     
     public void rejestracja()
@@ -185,8 +229,5 @@ public class Uzytkownik {
             }
         });
         return users;
-    }
-    
-    
-    
+    }    
 }

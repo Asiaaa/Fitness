@@ -25,6 +25,7 @@ public class Zajecia {
     private Time czas_trwania;
     private int id_stopien_trudnosci;
     private String opis;
+    private String stopien_trudnosci;
     
     protected JdbcTemplate jdbcTemplate;
     protected DataSource dataSource;
@@ -54,12 +55,12 @@ public class Zajecia {
         return czas_trwania;
     }
     
-    public void setStopienTrudnosci(int stopien)
+    public void setIdStopienTrudnosci(int stopien)
     {
         this.id_stopien_trudnosci=stopien;
     }
     
-    public int getStopienTrudnosci()
+    public int getIdStopienTrudnosci()
     {
         return id_stopien_trudnosci;
     }
@@ -72,6 +73,20 @@ public class Zajecia {
     public String getOpis()
     {
         return opis;
+    }
+    
+    public void setIdZajecia(int Id){
+        this.id_zajecia=Id;
+    }
+    public int getIdZajecia(){
+        return this.id_zajecia;
+    }
+    
+    public void setStopienTrudnosci(String st){
+        this.stopien_trudnosci=st;
+    }
+    public String getStopienTrudnosci(){
+        return this.stopien_trudnosci;
     }
     
     public void DodajZajecia()
@@ -103,11 +118,30 @@ public class Zajecia {
                 zajecia.id_zajecia=rs.getInt("id_zajecia");
                 zajecia.setNazwa(rs.getString("nazwa"));
                 zajecia.setCzasTrwania(rs.getTime("czas_trwania"));
-                zajecia.setStopienTrudnosci(rs.getInt("id_stopien_trudnosci"));
+                zajecia.setIdStopienTrudnosci(rs.getInt("id_stopien_trudnosci"));
                 zajecia.setOpis(rs.getString("opis"));
                 return zajecia;
             }
         });
         return zajeciaa;
     }  
+    
+    public List<Zajecia> WyswietlZajeciaView()
+    {
+        List<Zajecia> zajeciaa = this.jdbcTemplate.query(
+        "select * from zajecia_view",
+        new RowMapper<Zajecia>() {
+                @Override
+                public Zajecia mapRow(ResultSet rs, int rowNum) throws SQLException {
+                Zajecia zajecia = new Zajecia();
+                zajecia.id_zajecia=rs.getInt("id_zajecia");
+                zajecia.setNazwa(rs.getString("nazwa"));
+                zajecia.setCzasTrwania(rs.getTime("czas_trwania"));
+                zajecia.setStopienTrudnosci(rs.getString("stopien_trudnosci"));
+                zajecia.setOpis(rs.getString("opis"));
+                return zajecia;
+            }
+        });
+        return zajeciaa;
+    } 
 }

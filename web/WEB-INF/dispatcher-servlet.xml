@@ -25,7 +25,9 @@
                 <prop key="oferta.htm">ofertaController</prop>
                 <prop key="register*">registerController</prop>
                 <prop key="login.htm">loginController</prop>
-                <prop key="grafik.htm">grafikController</prop>
+                <prop key="grafik*">grafikController</prop>
+                <prop key="kadra*">kadraController</prop>
+                <prop key="zajecia*">zajeciaController</prop>
                 <prop key="panel_admina.*">panel_adminaController</prop>
                 <prop key="zarzadzaj_uzytkownicy.* edytuj_uzytkownika.* usun_uzytkownika.*">zarzadzaj_uzytkownikamiController</prop>
             </props>
