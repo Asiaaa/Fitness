@@ -13,7 +13,7 @@
                 <tr>
                     <td><c:out value="${zajecia.getNazwa()}"/></td>
                     <td><c:out value="${zajecia.getCzasTrwania()}"/></td>
-                    <td><c:out value="${zajecia.getStopien()}"/></td>
+                    <td><c:out value="${zajecia.getStopienTrudnosci()}"/></td>
                     <td style="font-size: small; text-align: left"><c:out value="${zajecia.getOpis()}"/></td>
                 </tr>
             </c:forEach>

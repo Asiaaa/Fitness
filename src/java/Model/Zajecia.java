@@ -84,6 +84,20 @@ public class Zajecia {
         return this.id_zajecia;
     }
     
+    public void setStopienTrudnosci(String st){
+        this.stopien_trudnosci=st;
+    }
+    public String getStopienTrudnosci(){
+        return this.stopien_trudnosci;
+    }
+    
+    public void setIdZajecia(int Id){
+        this.id_zajecia=Id;
+    }
+    public int getIdZajecia(){
+        return this.id_zajecia;
+    }
+    
     public void setStopienTrudnosci(int st){
         this.id_stopien_trudnosci=st;
     }

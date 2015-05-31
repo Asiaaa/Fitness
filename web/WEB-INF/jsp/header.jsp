@@ -41,7 +41,7 @@
             <security:authorize access="hasRole('ROLE_STAFF')">
             <a href="<c:url value='/panel_admina.htm' />">Zarządzaj</a> | 
             </security:authorize>
-             <security:authorize access="hasRole('ROLE_INSTRUCTOR')"> 
+             <security:authorize access="hasRole('ROLE_INSTRUCTOR')">
             <a href="<c:url value='/grafik_moj' />">Mój grafik</a> | 
             </security:authorize>
             <security:authorize access="isAuthenticated()">
