@@ -20,7 +20,7 @@
         <c:out value="${time}" />:00
         </TD>
        
-        <c:forEach begin="0" end="6" step="1" var="day">
+        <c:forEach begin="1" end="7" step="1" var="day">
         <TD align="center" valign="middle" width="100">
            
         <c:forEach items="${grafikLista}" var="clazz">

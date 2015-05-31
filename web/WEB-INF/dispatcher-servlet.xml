@@ -27,6 +27,7 @@
                 <prop key="login.htm">loginController</prop>
                 <prop key="grafik*">grafikController</prop>
                 <prop key="kadra*">kadraController</prop>
+                <prop key="zajecia*">zajeciaController</prop>
             </props>
         </property>
     </bean>

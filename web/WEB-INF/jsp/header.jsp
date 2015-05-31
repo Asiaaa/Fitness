@@ -23,7 +23,7 @@
         <div id="menu_top">
             <h3>
                 <a href="oferta.htm">Oferta | </a>
-                <a href="grafik.htm">Zajęcia | </a>
+                <a href="zajecia.htm">Zajęcia | </a>
                 <a href="grafik.htm">Grafik | </a>
                 <a href="grafik.htm">Siłownia | </a>
                 <a href="kadra.htm">Kadra | </a>
