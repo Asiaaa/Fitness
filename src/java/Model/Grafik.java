@@ -6,9 +6,13 @@
 
 package Model;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Time;
+import java.util.List;
 import javax.sql.DataSource;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
 
 /**
  *
@@ -18,8 +22,8 @@ public class Grafik {
     public int id_grafik;
     private int id_instruktor;
     private int id_dzien_tygodnia;
-    private Time godz_start;
-    private Time godz_end;
+    private int godz_start;
+    private int godz_end;
     
     protected JdbcTemplate jdbcTemplate;
     protected DataSource dataSource;
@@ -39,22 +43,22 @@ public class Grafik {
        return id_instruktor;
     }
     
-    public void setGodzStart(Time godz_start)
+    public void setGodzStart(int godz_start)
     {
         this.godz_start=godz_start;
     }
     
-    public Time getGodzStart()
+    public int getGodzStart()
     {
         return godz_start;
     }
     
-    public void setGodzEnd(Time godz_end)
+    public void setGodzEnd(int godz_end)
     {
         this.godz_end=godz_end;
     }
     
-    public Time getGodzEnd()
+    public int getGodzEnd()
     {
         return godz_end;
     }
@@ -80,5 +84,38 @@ public class Grafik {
        
    }
     */
+    
+    public String imie;
+    public void setImie(String imie){
+        this.imie = imie;
+    }
+    public String getImie(){
+        return this.imie;
+    }
+    
+    public String nazwisko;
+    public void setNazwisko(String nazwisko){
+        this.nazwisko = nazwisko;
+    }
+    public String getNazwisko(){
+        return this.nazwisko;
+    }
+    public List<Grafik> WyswietlGrafik(){
+        List<Grafik> grafik = this.jdbcTemplate.query(
+        "select * from grafik_silownia_view",
+        new RowMapper<Grafik>() {
+            @Override
+            public Grafik mapRow(ResultSet rs, int rowNum) throws SQLException {
+                Grafik gf = new Grafik();
+                gf.setGodzStart(rs.getInt("godz_start_dyzur"));
+                gf.setGodzEnd(rs.getInt("godz_koniec_dyzur"));
+                gf.setIdDzienTygodnia(rs.getInt("id_dzien_tygodnia"));
+                gf.setNazwisko(rs.getString("nazwisko"));
+                gf.setImie(rs.getString("imie"));
+                return gf;
+            }
+        });
+        return grafik;
+    }
     
 }

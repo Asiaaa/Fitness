@@ -26,10 +26,10 @@
            
         <c:forEach items="${grafikLista}" var="clazz">
         <c:if test="${clazz.getGodzStart() <= time 
-        && clazz.getGodzKoniec() > time 
-        && clazz.getIdDzienTygodnia() == day}">
+        && clazz.getGodzEnd() > time 
+        && clazz.getDzienTygodnia() == day}">
               
-        <c:out value="${clazz.getZajecia()}" />
+        <c:out value="${clazz.getNazwisko()}" />
         </c:if>
         </c:forEach>
         </TD>

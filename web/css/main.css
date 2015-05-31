@@ -16,6 +16,11 @@ h1{
     font-size: 60px;
 }
 
+h2{
+    display: table;
+    width: 100%;
+    border-bottom: solid 1px;
+}
 #menu_top{
     background: #636363;
     height: 40px;
@@ -92,4 +97,9 @@ form input{
     border-radius: 5px;
     padding: 5px;
     margin: 2px;
+}
+
+#table_zajecia td{
+    padding: 5px;
+    text-align: center
 }

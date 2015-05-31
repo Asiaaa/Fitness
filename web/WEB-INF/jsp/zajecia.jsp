@@ -1,7 +1,7 @@
 <%@include file="header.jsp" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <div id='context'>
-        <h2>Oferta</h2>
+        <h2>Zajęcia</h2>
         <table id="table_zajecia" border="1" cellspacing="0">
             <tr style="font-weight: bold">
                 <td width="50">Nr</td>

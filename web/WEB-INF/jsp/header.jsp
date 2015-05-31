@@ -25,7 +25,7 @@
                 <a href="oferta.htm">Oferta | </a>
                 <a href="zajecia.htm">Zajęcia | </a>
                 <a href="grafik.htm">Grafik | </a>
-                <a href="grafik.htm">Siłownia | </a>
+                <a href="grafik_silownia.htm">Siłownia | </a>
                 <a href="kadra.htm">Kadra | </a>
             <security:authorize access="!isAuthenticated()">
             <a href="register.htm">Rejestracja | </a>
@@ -41,7 +41,7 @@
             <a href="<c:url value='/admin' />">Zarządzaj</a> | 
             </security:authorize>
              <security:authorize access="hasRole('ROLE_INSTRUCTOR')">
-            <a href="<c:url value='/admin' />">Mój grafik</a> | 
+            <a href="<c:url value='/grafik_moj' />">Mój grafik</a> | 
             </security:authorize>
             <security:authorize access="isAuthenticated()">
             <a href="<c:url value='/j_spring_security_logout' />">  Wyloguj</a> | 
