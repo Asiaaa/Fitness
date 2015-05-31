@@ -72,22 +72,42 @@ public class Grafik_fitness {
     
     public List<Grafik_fitness> getAll(){
         List<Grafik_fitness> grafik = this.jdbcTemplate.query(
-        "select * from grafik_fitness",
+        "select * from grafik_fitness_view",
         new RowMapper<Grafik_fitness>() {
             @Override
             public Grafik_fitness mapRow(ResultSet rs, int rowNum) throws SQLException {
                 Grafik_fitness user = new Grafik_fitness();
                 user.setIdSala(rs.getInt("id_sala"));
-                user.setIdZajecia(rs.getInt("id_zajecia"));
+                user.setIdInstruktor(rs.getInt("id_instruktor"));
                 user.setGodzStart(rs.getInt("godz_start"));
                 user.setGodzKoniec(rs.getInt("godz_koniec"));
                 user.setIdDzienTygodnia(rs.getInt("id_dzien_tygodnia"));
+                user.setZajecia(rs.getString("nazwa"));
                 return user;
             }
         });
         return grafik;
     }
 
+    public List<Grafik_fitness> getAllKadra(){
+        List<Grafik_fitness> grafik = this.jdbcTemplate.query(
+        "select * from grafik_fitness_view group by concat(id_instruktor, nazwa)",
+        new RowMapper<Grafik_fitness>() {
+            @Override
+            public Grafik_fitness mapRow(ResultSet rs, int rowNum) throws SQLException {
+                Grafik_fitness user = new Grafik_fitness();
+                user.setIdSala(rs.getInt("id_sala"));
+                user.setIdInstruktor(rs.getInt("id_instruktor"));
+                user.setGodzStart(rs.getInt("godz_start"));
+                user.setGodzKoniec(rs.getInt("godz_koniec"));
+                user.setIdDzienTygodnia(rs.getInt("id_dzien_tygodnia"));
+                user.setZajecia(rs.getString("nazwa"));
+                return user;
+            }
+        });
+        return grafik;
+    }
+    
     public void setIdInstruktor(int aInt) {
         this.id_instruktor = aInt;
     }
@@ -118,6 +138,13 @@ public class Grafik_fitness {
     
     public int getGodzKoniec(){
         return this.godz_koniec;
+    }
+    
+    public void setZajecia(String zajecia){
+        this.zajecia = zajecia;
+    }
+    public String getZajecia(){
+        return this.zajecia;
     }
     
 }

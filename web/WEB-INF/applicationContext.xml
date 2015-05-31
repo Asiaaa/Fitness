@@ -43,6 +43,8 @@
     <security:intercept-url pattern="/index.htm*" access="permitAll" />
     <security:intercept-url pattern="/" access="permitAll" />
     <security:intercept-url pattern="/grafik.htm*" access="permitAll" />
+    <security:intercept-url pattern="/oferta.htm*" access="permitAll" />
+    <security:intercept-url pattern="/kadra.htm*" access="permitAll" />
     <security:intercept-url pattern="/zajecia.htm*" access="permitAll" />
     <security:intercept-url pattern="/**" access="isAuthenticated()" /> 
  
