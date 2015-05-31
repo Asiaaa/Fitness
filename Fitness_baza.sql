@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Czas generowania: 31 Maj 2015, 17:33
+-- Czas generowania: 31 Maj 2015, 20:53
 -- Wersja serwera: 5.6.21
 -- Wersja PHP: 5.6.3
 
@@ -40,10 +40,10 @@ DELIMITER ;
 --
 
 CREATE TABLE IF NOT EXISTS `autoryzacja` (
-  `id_rola` int(5) unsigned NOT NULL,
+`id_rola` int(5) unsigned NOT NULL,
   `id_uzytkownik` int(5) unsigned NOT NULL,
   `rola` varchar(20) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
 
 --
 -- Zrzut danych tabeli `autoryzacja`
@@ -94,17 +94,14 @@ CREATE TABLE IF NOT EXISTS `grafik_fitness` (
   `id_dzien_tygodnia` int(5) unsigned NOT NULL,
   `id_sala` int(5) unsigned NOT NULL,
   `max_ilosc_miejsc` int(5) unsigned NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 --
 -- Zrzut danych tabeli `grafik_fitness`
 --
 
 INSERT INTO `grafik_fitness` (`id_grafik_fitness`, `id_zajecia`, `id_instruktor`, `godz_start`, `godz_koniec`, `id_dzien_tygodnia`, `id_sala`, `max_ilosc_miejsc`) VALUES
-(1, 1, 1, '09:00:00', '10:00:00', 1, 1, 10),
-(2, 1, 1, '12:00:00', '13:00:00', 5, 1, 20),
-(3, 2, 3, '16:00:00', '17:00:00', 1, 2, 20),
-(4, 3, 1, '08:00:00', '09:00:00', 1, 1, 20);
+(1, 1, 3, '09:00:00', '10:00:00', 1, 1, 20);
 
 -- --------------------------------------------------------
 
@@ -112,14 +109,12 @@ INSERT INTO `grafik_fitness` (`id_grafik_fitness`, `id_zajecia`, `id_instruktor`
 -- Zastąpiona struktura widoku `grafik_fitness_view`
 --
 CREATE TABLE IF NOT EXISTS `grafik_fitness_view` (
-`id_grafik_fitness` int(5) unsigned
-,`id_dzien_tygodnia` int(5) unsigned
+`id_sala` int(5) unsigned
+,`id_instruktor` int(5) unsigned
 ,`godz_start` time
 ,`godz_koniec` time
-,`id_instruktor` int(5) unsigned
-,`id_sala` int(5) unsigned
+,`id_dzien_tygodnia` int(5) unsigned
 ,`nazwa` varchar(30)
-,`max_ilosc_miejsc` int(5) unsigned
 );
 -- --------------------------------------------------------
 
@@ -139,8 +134,31 @@ CREATE TABLE IF NOT EXISTS `grafik_silownia` (
 --
 
 INSERT INTO `grafik_silownia` (`id_grafik_silownia`, `id_dzien_tygodnia`, `godz_start_dyzur`, `godz_koniec_dyzur`) VALUES
-(1, 1, '09:00:00', '10:00:00');
+(1, 2, '09:00:00', '17:00:00');
 
+-- --------------------------------------------------------
+
+--
+-- Zastąpiona struktura widoku `grafik_silownia_view`
+--
+CREATE TABLE IF NOT EXISTS `grafik_silownia_view` (
+`id_grafik_silownia` int(5) unsigned
+,`godz_start_dyzur` time
+,`godz_koniec_dyzur` time
+,`id_dzien_tygodnia` int(5) unsigned
+,`imie` varchar(32)
+,`nazwisko` varchar(32)
+);
+-- --------------------------------------------------------
+
+--
+-- Zastąpiona struktura widoku `instruktorzy_view`
+--
+CREATE TABLE IF NOT EXISTS `instruktorzy_view` (
+`id_uzytkownik` int(5) unsigned
+,`imie` varchar(32)
+,`nazwisko` varchar(32)
+);
 -- --------------------------------------------------------
 
 --
@@ -158,7 +176,7 @@ CREATE TABLE IF NOT EXISTS `instruktor_silownia` (
 --
 
 INSERT INTO `instruktor_silownia` (`id_instruktor_grafik`, `id_instruktor`, `id_grafik_silownia`) VALUES
-(1, 1, 1);
+(1, 3, 1);
 
 -- --------------------------------------------------------
 
@@ -250,18 +268,18 @@ CREATE TABLE IF NOT EXISTS `uzytkownik` (
   `nazwisko` varchar(32) NOT NULL,
   `email` varchar(32) NOT NULL,
   `telefon` varchar(32) NOT NULL,
-  `opis` text,
-  `id_rola` int(5) unsigned NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+  `opis` text
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8;
 
 --
 -- Zrzut danych tabeli `uzytkownik`
 --
 
-INSERT INTO `uzytkownik` (`id_uzytkownik`, `login`, `haslo`, `imie`, `nazwisko`, `email`, `telefon`, `opis`, `id_rola`) VALUES
-(1, 'jkowalski', 'asdf', 'Jan', 'Kowalski', 'jkowalski@gmail.com', '555444333', NULL, 2),
-(2, 'awarias', 'asdf', 'Angelina', 'Warias', 'awarias@gmail.com', '555888999', NULL, 1),
-(3, 'sylprzy', 'asdf', 'Sylwia', 'Przybylska', 'sylwiaprzybylska@gmail.com', '596587452', NULL, 2);
+INSERT INTO `uzytkownik` (`id_uzytkownik`, `login`, `haslo`, `imie`, `nazwisko`, `email`, `telefon`, `opis`) VALUES
+(1, 'alpha', 'alpha', 'Mateusz', 'Królikowski', 'mkrolikowski@fitness.pl', '791566341', 'Administrator strony fitness.'),
+(2, 'beti', 'beti', 'Beata', 'Jankowska', 'bjankowska@fitness.pl', '605489331', 'Pracownik recepcji.'),
+(3, 'dario', 'dario', 'Dariusz', 'Ostrowski', 'dostrowski', '888481265', 'Trener siłowni.'),
+(4, 'kaska', 'kaska', 'Katarzyna', 'Smuda', 'ksmuda@onet.pl', '502964723', NULL);
 
 -- --------------------------------------------------------
 
@@ -275,18 +293,34 @@ CREATE TABLE IF NOT EXISTS `zajecia` (
   `czas_trwania` time NOT NULL,
   `id_stopien_trudnosci` int(5) unsigned NOT NULL,
   `opis` text NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
 
 --
 -- Zrzut danych tabeli `zajecia`
 --
 
 INSERT INTO `zajecia` (`id_zajecia`, `nazwa`, `czas_trwania`, `id_stopien_trudnosci`, `opis`) VALUES
-(1, 'Zumba', '01:00:00', 1, ''),
-(2, 'Pilates', '01:00:00', 1, ''),
-(3, 'Body shape', '01:00:00', 2, ''),
-(4, 'ABS', '01:00:00', 3, '');
+(1, 'BPU', '01:00:00', 2, 'Trening modelujący dolne partie ciała, brzuch, pośladki i uda. Składa się z rozgrzewki w prostym układzie choreograficznym oraz części ćwiczeń modelujących. '),
+(2, 'Pump', '01:00:00', 3, 'Trening z wykorzystaniem sztang o zróżnicowanym obciążeniu. Ma wpływ na poprawę wydolności organizmu, wzrost wytrzymałości i siły mięśni bez wzrostu ich obwodów, utratę tkanki tłuszczowej oraz przeciwdziała osteoporozie. '),
+(3, 'Step', '01:00:00', 3, 'Trening wytrzymałościowy prowadzony na specjalnie przeznaczonych do tego platformach. Doskonale działa na mięśnie nóg, pośladków, wzmacnia układ sercowo- mięśniowy, a do tego poprawia kondycję i pomaga stracić zbędne kilogramy. Sekwencje prostych kroków oraz ich ewolucje umożliwiają dopasowanie zajęć do każdego poziomu zaawansowania co czyni je niezwykle atrakcyjnymi. '),
+(4, 'Zumba', '01:00:00', 3, 'Jest to zainspirowana latynoskimi rytmami fuzja tańca i aerobiku. Zumba jest bardzo innowacyjnym systemem fitness, który poprzez świetną zabawę kształtuje naszą sylwetkę, dba o naszą kondycję, a przede wszystkim napawa nas optymizmem i wprawia w świetne samopoczucie, które zostaje na długo, długo poza zajęciami. Proste kroki taneczne, świetne kombinacje ruchów i motywująca muzyka stwarzają atmosferę świetnej imprezy i totalnie porywają nas do zabawy.'),
+(5, 'TRX', '01:00:00', 3, 'TRX to system regulowanych pasków w kształcie litery Y, zrobionych z niezwykle wytrzymałego polimeru. Urządzenie daje możliwość kompleksowego treningu całego ciała. '),
+(6, 'Pilates', '01:00:00', 1, 'Podstawą tej techniki jest oddychanie, na którym oparte są wszystkie ćwiczenia. Technika polega na precyzyjnym spinaniu, rozluźnianiu oraz rozciąganiu poszczególnych partii mięśniowych. Polecany dla osób z wadami postawy oraz dolegliwościami związanymi z kręgosłupem. '),
+(7, 'Body Ball', '01:00:00', 1, 'Trening z wykorzystaniem piłek o różnej średnicy. Wykonuje się ćwiczenia na wszystkie grupy mięśniowe, polecany jest również dla osób, które mają problemy z kręgosłupem. '),
+(8, 'Indoor Cycling', '01:00:00', 3, 'To połączenie treningu grupowego z treningiem kolarskim na rowerze stacjonarnym. Dzięki takiemu rozwiązaniu każdy trening jest planowany i kontrolowany przez wyszkolonego instruktora, wzrasta motywacja i atrakcyjność zajęć dzięki odpowiedniej, energetyzującej muzyce oraz poczuciu „bycia w grupie”. Indoor Cycling nie wymaga poczucia rytmu, tanecznych ruchów ani znajomości specyficznych kroków. Jest treningiem bezpiecznym, w którym ryzyko kontuzji ograniczone jest do minimum. ');
 
+-- --------------------------------------------------------
+
+--
+-- Zastąpiona struktura widoku `zajecia_view`
+--
+CREATE TABLE IF NOT EXISTS `zajecia_view` (
+`czas_trwania` time
+,`id_zajecia` int(5) unsigned
+,`nazwa` varchar(30)
+,`opis` text
+,`stopien_trudnosci` varchar(20)
+);
 -- --------------------------------------------------------
 
 --
@@ -294,7 +328,34 @@ INSERT INTO `zajecia` (`id_zajecia`, `nazwa`, `czas_trwania`, `id_stopien_trudno
 --
 DROP TABLE IF EXISTS `grafik_fitness_view`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `grafik_fitness_view` AS select `grafik_fitness`.`id_grafik_fitness` AS `id_grafik_fitness`,`grafik_fitness`.`id_dzien_tygodnia` AS `id_dzien_tygodnia`,`grafik_fitness`.`godz_start` AS `godz_start`,`grafik_fitness`.`godz_koniec` AS `godz_koniec`,`grafik_fitness`.`id_instruktor` AS `id_instruktor`,`grafik_fitness`.`id_sala` AS `id_sala`,`zajecia`.`nazwa` AS `nazwa`,`grafik_fitness`.`max_ilosc_miejsc` AS `max_ilosc_miejsc` from (`grafik_fitness` join `zajecia`) where (`zajecia`.`id_zajecia` = `grafik_fitness`.`id_zajecia`);
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `grafik_fitness_view` AS select `grafik_fitness`.`id_sala` AS `id_sala`,`grafik_fitness`.`id_instruktor` AS `id_instruktor`,`grafik_fitness`.`godz_start` AS `godz_start`,`grafik_fitness`.`godz_koniec` AS `godz_koniec`,`grafik_fitness`.`id_dzien_tygodnia` AS `id_dzien_tygodnia`,`zajecia`.`nazwa` AS `nazwa` from (`grafik_fitness` join `zajecia`) where (`grafik_fitness`.`id_zajecia` = `zajecia`.`id_zajecia`);
+
+-- --------------------------------------------------------
+
+--
+-- Struktura widoku `grafik_silownia_view`
+--
+DROP TABLE IF EXISTS `grafik_silownia_view`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `grafik_silownia_view` AS select `gs`.`id_grafik_silownia` AS `id_grafik_silownia`,`gs`.`godz_start_dyzur` AS `godz_start_dyzur`,`gs`.`godz_koniec_dyzur` AS `godz_koniec_dyzur`,`gs`.`id_dzien_tygodnia` AS `id_dzien_tygodnia`,`u`.`imie` AS `imie`,`u`.`nazwisko` AS `nazwisko` from ((`grafik_silownia` `gs` join `instruktor_silownia` `i`) join `uzytkownik` `u`) where ((`gs`.`id_grafik_silownia` = `i`.`id_grafik_silownia`) and (`i`.`id_instruktor` = `u`.`id_uzytkownik`));
+
+-- --------------------------------------------------------
+
+--
+-- Struktura widoku `instruktorzy_view`
+--
+DROP TABLE IF EXISTS `instruktorzy_view`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `instruktorzy_view` AS select `u`.`id_uzytkownik` AS `id_uzytkownik`,`u`.`imie` AS `imie`,`u`.`nazwisko` AS `nazwisko` from (`uzytkownik` `u` join `autoryzacja` `a`) where ((`u`.`id_uzytkownik` = `a`.`id_uzytkownik`) and (`a`.`id_rola` = 4));
+
+-- --------------------------------------------------------
+
+--
+-- Struktura widoku `zajecia_view`
+--
+DROP TABLE IF EXISTS `zajecia_view`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `zajecia_view` AS select `z`.`czas_trwania` AS `czas_trwania`,`z`.`id_zajecia` AS `id_zajecia`,`z`.`nazwa` AS `nazwa`,`z`.`opis` AS `opis`,`st`.`nazwa` AS `stopien_trudnosci` from (`zajecia` `z` join `stopien_trudnosci` `st`) where (`z`.`id_stopien_trudnosci` = `st`.`id_stopien_trudnosci`);
 
 --
 -- Indeksy dla zrzutów tabel
@@ -304,7 +365,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 -- Indexes for table `autoryzacja`
 --
 ALTER TABLE `autoryzacja`
- ADD PRIMARY KEY (`id_rola`);
+ ADD PRIMARY KEY (`id_rola`), ADD KEY `id_uzytkownik` (`id_uzytkownik`);
 
 --
 -- Indexes for table `dni_tygodnia`
@@ -371,6 +432,11 @@ ALTER TABLE `zajecia`
 --
 
 --
+-- AUTO_INCREMENT dla tabeli `autoryzacja`
+--
+ALTER TABLE `autoryzacja`
+MODIFY `id_rola` int(5) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=9;
+--
 -- AUTO_INCREMENT dla tabeli `dni_tygodnia`
 --
 ALTER TABLE `dni_tygodnia`
@@ -379,7 +445,7 @@ MODIFY `id_dzien_tygodnia` int(5) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMEN
 -- AUTO_INCREMENT dla tabeli `grafik_fitness`
 --
 ALTER TABLE `grafik_fitness`
-MODIFY `id_grafik_fitness` int(5) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
+MODIFY `id_grafik_fitness` int(5) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT dla tabeli `grafik_silownia`
 --
@@ -414,12 +480,12 @@ MODIFY `id_typ_zajec` int(5) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
 -- AUTO_INCREMENT dla tabeli `uzytkownik`
 --
 ALTER TABLE `uzytkownik`
-MODIFY `id_uzytkownik` int(5) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
+MODIFY `id_uzytkownik` int(5) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=14;
 --
 -- AUTO_INCREMENT dla tabeli `zajecia`
 --
 ALTER TABLE `zajecia`
-MODIFY `id_zajecia` int(5) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
+MODIFY `id_zajecia` int(5) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=9;
 --
 -- Ograniczenia dla zrzutów tabel
 --
