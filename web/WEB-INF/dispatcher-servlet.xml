@@ -26,6 +26,8 @@
                 <prop key="register*">registerController</prop>
                 <prop key="login.htm">loginController</prop>
                 <prop key="grafik.htm">grafikController</prop>
+                <prop key="panel_admina.*">panel_adminaController</prop>
+                <prop key="zarzadzaj_uzytkownicy.* edytuj_uzytkownika.* usun_uzytkownika.*">zarzadzaj_uzytkownikamiController</prop>
             </props>
         </property>
     </bean>
@@ -53,6 +55,12 @@
     <bean name="grafikController"
         class="org.springframework.web.servlet.mvc.ParameterizableViewController"
         p:viewName="grafik"/>
+    <bean name="panel_adminaController"
+        class="org.springframework.web.servlet.mvc.ParameterizableViewController"
+        p:viewName="panel_admina"/>
+    <bean name="zarzadzaj_uzytkownikamiController"
+        class="org.springframework.web.servlet.mvc.ParameterizableViewController"
+        p:viewName="zarzadzaj_uzytkownicy"/>
     
 
 </beans>

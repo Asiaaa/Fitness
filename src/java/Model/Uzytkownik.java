@@ -27,6 +27,7 @@ public class Uzytkownik {
     private String email;
     private String telefon;
     private String rola;
+    private String opis;
     
     protected JdbcTemplate jdbcTemplate;
     protected DataSource dataSource;
@@ -34,6 +35,14 @@ public class Uzytkownik {
     public void setDataSource(DataSource dataSource) {
         this.dataSource=dataSource;
         this.jdbcTemplate = new JdbcTemplate(this.dataSource);
+    }
+    
+    public int getId() {
+        return id_uzytkownik;
+    }
+    
+    public void setId(int id) {
+        id_uzytkownik=id;
     }
     
     public String getImie()
@@ -107,6 +116,16 @@ public class Uzytkownik {
         return this.rola;
     }
     
+    public void setOpis(String opis)
+    {
+        this.opis=opis;
+    }
+    
+    public String getOpis()
+    {
+        return this.opis;
+    }
+    
     public void DodajPracownika(String login, String haslo, String imie, String nazwisko, String email, String telefon)
     {
         jdbcTemplate.update("INSERT INTO UZYTKOWNIK (LOGIN, HASLO, IMIE, NAZWISKO, EMAIL, TELEFON, OPIS, ROLA)" + "VALUES(?,?,?,?,?,?,?,?)",
@@ -140,28 +159,28 @@ public class Uzytkownik {
         new Object[] { login, haslo, imie, nazwisko, email, telefon});
     }
     
-    /*public List<Grafik> WyswietlGrafik()
-    {
-        
-    }*/
-    
     public void WyslijEmail(String temat, String wiadomosc, String adresat) throws MessagingException
     {
         Mail message = new Mail(adresat, temat, wiadomosc);
         message.send();
     } 
- 
-    
-    public List<Uzytkownik> select_users_base_test() // testowe - wyswietla wszystkich uzytkownikow
+  
+    public List<Uzytkownik> WyswietlUzytkownikow() 
     {
         List<Uzytkownik> users = this.jdbcTemplate.query(
-        "select imie, nazwisko from uzytkownik",
+        "select u.*, a.rola from uzytkownik u inner join autoryzacja a on u.id_uzytkownik=a.id_uzytkownik",
         new RowMapper<Uzytkownik>() {
             @Override
             public Uzytkownik mapRow(ResultSet rs, int rowNum) throws SQLException {
                 Uzytkownik user = new Uzytkownik();
+                user.setId(rs.getInt("id_uzytkownik"));
+                user.setLogin(rs.getString("login"));
                 user.setImie(rs.getString("imie"));
                 user.setNazwisko(rs.getString("nazwisko"));
+                user.setEmail(rs.getString("email"));
+                user.setTelefon(rs.getString("telefon"));
+                user.setOpis(rs.getString("opis"));
+                user.setRola(rs.getString("rola"));
                 return user;
             }
         });

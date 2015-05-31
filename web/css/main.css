@@ -26,9 +26,48 @@ h1{
     text-decoration: none;
 }
 
+#linki a{
+    text-align: right;
+    text-decoration: none;
+    vertical-align: middle;
+    color: #d0ed45;
+    font-size: 20px;
+}
+
+#linki h1{
+    text-decoration: none;
+    vertical-align: middle;
+    color: #d0ed45;
+    font-size: 25px;
+    font-weight: bold;
+} 
 nav a{
     text-decoration: none;
     color: #d0ed45;
+}
+
+#zarzadzanko{
+    border: 2px solid orange;
+    border-collapse: collapse;
+    font-size: 20px;
+    color: #d0ed45;
+}
+
+#zarzadzanko td, #zarzadzanko th{
+    border: 2px solid orange;
+    padding: 5px;
+}
+a .fa{
+    color: #d0ed45; 
+}
+
+a:hover .fa{
+    color: orange;
+}
+
+[class^="fa-"], [class*=" fa-"] {
+    text-align: center;
+    width: 100%;
 }
 
 nav a:hover{

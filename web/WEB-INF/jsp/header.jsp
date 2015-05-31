@@ -15,6 +15,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Fitness</title>
         <link rel="stylesheet" href="css/main.css"/>
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
     </head>
 
     <body>
@@ -38,10 +39,10 @@
             <a href="<c:url value='/admin' />">Panel administratora</a> | 
             </security:authorize>
             <security:authorize access="hasRole('ROLE_STAFF')">
-            <a href="<c:url value='/admin' />">Zarządzaj</a> | 
+            <a href="<c:url value='/panel_admina.htm' />">Zarządzaj</a> | 
             </security:authorize>
              <security:authorize access="hasRole('ROLE_INSTRUCTOR')">
-            <a href="<c:url value='/admin' />">Mój grafik</a> | 
+            <a href="<c:url value='/panel_admina.htm' />">Mój grafik</a> | 
             </security:authorize>
             <security:authorize access="isAuthenticated()">
             <a href="<c:url value='/j_spring_security_logout' />">  Wyloguj</a> | 
