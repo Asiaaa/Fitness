@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Czas generowania: 31 Maj 2015, 20:53
+-- Czas generowania: 01 Cze 2015, 21:15
 -- Wersja serwera: 5.6.21
 -- Wersja PHP: 5.6.3
 
@@ -94,14 +94,16 @@ CREATE TABLE IF NOT EXISTS `grafik_fitness` (
   `id_dzien_tygodnia` int(5) unsigned NOT NULL,
   `id_sala` int(5) unsigned NOT NULL,
   `max_ilosc_miejsc` int(5) unsigned NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
 --
 -- Zrzut danych tabeli `grafik_fitness`
 --
 
 INSERT INTO `grafik_fitness` (`id_grafik_fitness`, `id_zajecia`, `id_instruktor`, `godz_start`, `godz_koniec`, `id_dzien_tygodnia`, `id_sala`, `max_ilosc_miejsc`) VALUES
-(1, 1, 3, '09:00:00', '10:00:00', 1, 1, 20);
+(1, 1, 3, '09:00:00', '10:00:00', 1, 1, 20),
+(2, 2, 3, '15:00:00', '16:00:00', 5, 1, 20),
+(3, 1, 3, '11:00:00', '12:00:00', 4, 1, 10);
 
 -- --------------------------------------------------------
 
@@ -109,7 +111,8 @@ INSERT INTO `grafik_fitness` (`id_grafik_fitness`, `id_zajecia`, `id_instruktor`
 -- Zastąpiona struktura widoku `grafik_fitness_view`
 --
 CREATE TABLE IF NOT EXISTS `grafik_fitness_view` (
-`id_sala` int(5) unsigned
+`id_grafik_fitness` int(5) unsigned
+,`id_sala` int(5) unsigned
 ,`id_instruktor` int(5) unsigned
 ,`godz_start` time
 ,`godz_koniec` time
@@ -148,6 +151,7 @@ CREATE TABLE IF NOT EXISTS `grafik_silownia_view` (
 ,`id_dzien_tygodnia` int(5) unsigned
 ,`imie` varchar(32)
 ,`nazwisko` varchar(32)
+,`id_uzytkownik` int(5) unsigned
 );
 -- --------------------------------------------------------
 
@@ -158,6 +162,7 @@ CREATE TABLE IF NOT EXISTS `instruktorzy_view` (
 `id_uzytkownik` int(5) unsigned
 ,`imie` varchar(32)
 ,`nazwisko` varchar(32)
+,`opis` text
 );
 -- --------------------------------------------------------
 
@@ -187,13 +192,20 @@ INSERT INTO `instruktor_silownia` (`id_instruktor_grafik`, `id_instruktor`, `id_
 CREATE TABLE IF NOT EXISTS `rezerwacja` (
 `id_rezerwacja` int(5) unsigned NOT NULL,
   `id_grafik_fitness` int(5) unsigned NOT NULL,
-  `id_grafik_silownia` int(5) unsigned NOT NULL,
+  `id_grafik_silownia` int(5) unsigned DEFAULT NULL,
   `id_klient` int(5) unsigned NOT NULL,
-  `data` date NOT NULL,
-  `godz_start` time NOT NULL,
-  `godz_koniec` time NOT NULL,
-  `id_typ_zajec` int(5) unsigned NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `data` date DEFAULT NULL,
+  `godz_start` time DEFAULT NULL,
+  `godz_koniec` time DEFAULT NULL,
+  `id_typ_zajec` int(5) unsigned DEFAULT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
+
+--
+-- Zrzut danych tabeli `rezerwacja`
+--
+
+INSERT INTO `rezerwacja` (`id_rezerwacja`, `id_grafik_fitness`, `id_grafik_silownia`, `id_klient`, `data`, `godz_start`, `godz_koniec`, `id_typ_zajec`) VALUES
+(8, 3, NULL, 4, NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -328,7 +340,7 @@ CREATE TABLE IF NOT EXISTS `zajecia_view` (
 --
 DROP TABLE IF EXISTS `grafik_fitness_view`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `grafik_fitness_view` AS select `grafik_fitness`.`id_sala` AS `id_sala`,`grafik_fitness`.`id_instruktor` AS `id_instruktor`,`grafik_fitness`.`godz_start` AS `godz_start`,`grafik_fitness`.`godz_koniec` AS `godz_koniec`,`grafik_fitness`.`id_dzien_tygodnia` AS `id_dzien_tygodnia`,`zajecia`.`nazwa` AS `nazwa` from (`grafik_fitness` join `zajecia`) where (`grafik_fitness`.`id_zajecia` = `zajecia`.`id_zajecia`);
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `grafik_fitness_view` AS select `grafik_fitness`.`id_grafik_fitness` AS `id_grafik_fitness`,`grafik_fitness`.`id_sala` AS `id_sala`,`grafik_fitness`.`id_instruktor` AS `id_instruktor`,`grafik_fitness`.`godz_start` AS `godz_start`,`grafik_fitness`.`godz_koniec` AS `godz_koniec`,`grafik_fitness`.`id_dzien_tygodnia` AS `id_dzien_tygodnia`,`zajecia`.`nazwa` AS `nazwa` from (`grafik_fitness` join `zajecia`) where (`grafik_fitness`.`id_zajecia` = `zajecia`.`id_zajecia`);
 
 -- --------------------------------------------------------
 
@@ -337,7 +349,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 --
 DROP TABLE IF EXISTS `grafik_silownia_view`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `grafik_silownia_view` AS select `gs`.`id_grafik_silownia` AS `id_grafik_silownia`,`gs`.`godz_start_dyzur` AS `godz_start_dyzur`,`gs`.`godz_koniec_dyzur` AS `godz_koniec_dyzur`,`gs`.`id_dzien_tygodnia` AS `id_dzien_tygodnia`,`u`.`imie` AS `imie`,`u`.`nazwisko` AS `nazwisko` from ((`grafik_silownia` `gs` join `instruktor_silownia` `i`) join `uzytkownik` `u`) where ((`gs`.`id_grafik_silownia` = `i`.`id_grafik_silownia`) and (`i`.`id_instruktor` = `u`.`id_uzytkownik`));
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `grafik_silownia_view` AS select `gs`.`id_grafik_silownia` AS `id_grafik_silownia`,`gs`.`godz_start_dyzur` AS `godz_start_dyzur`,`gs`.`godz_koniec_dyzur` AS `godz_koniec_dyzur`,`gs`.`id_dzien_tygodnia` AS `id_dzien_tygodnia`,`u`.`imie` AS `imie`,`u`.`nazwisko` AS `nazwisko`,`u`.`id_uzytkownik` AS `id_uzytkownik` from ((`grafik_silownia` `gs` join `instruktor_silownia` `i`) join `uzytkownik` `u`) where ((`gs`.`id_grafik_silownia` = `i`.`id_grafik_silownia`) and (`i`.`id_instruktor` = `u`.`id_uzytkownik`));
 
 -- --------------------------------------------------------
 
@@ -346,7 +358,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 --
 DROP TABLE IF EXISTS `instruktorzy_view`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `instruktorzy_view` AS select `u`.`id_uzytkownik` AS `id_uzytkownik`,`u`.`imie` AS `imie`,`u`.`nazwisko` AS `nazwisko` from (`uzytkownik` `u` join `autoryzacja` `a`) where ((`u`.`id_uzytkownik` = `a`.`id_uzytkownik`) and (`a`.`id_rola` = 4));
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `instruktorzy_view` AS select `u`.`id_uzytkownik` AS `id_uzytkownik`,`u`.`imie` AS `imie`,`u`.`nazwisko` AS `nazwisko`,`u`.`opis` AS `opis` from (`uzytkownik` `u` join `autoryzacja` `a`) where ((`u`.`id_uzytkownik` = `a`.`id_uzytkownik`) and (`a`.`id_rola` = 4));
 
 -- --------------------------------------------------------
 
@@ -445,7 +457,7 @@ MODIFY `id_dzien_tygodnia` int(5) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMEN
 -- AUTO_INCREMENT dla tabeli `grafik_fitness`
 --
 ALTER TABLE `grafik_fitness`
-MODIFY `id_grafik_fitness` int(5) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
+MODIFY `id_grafik_fitness` int(5) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT dla tabeli `grafik_silownia`
 --
@@ -460,7 +472,7 @@ MODIFY `id_instruktor_grafik` int(5) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCRE
 -- AUTO_INCREMENT dla tabeli `rezerwacja`
 --
 ALTER TABLE `rezerwacja`
-MODIFY `id_rezerwacja` int(5) unsigned NOT NULL AUTO_INCREMENT;
+MODIFY `id_rezerwacja` int(5) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=9;
 --
 -- AUTO_INCREMENT dla tabeli `sala`
 --

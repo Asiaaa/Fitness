@@ -29,6 +29,7 @@
                 <prop key="kadra*">kadraController</prop>
                 <prop key="zajecia*">zajeciaController</prop>
                 <prop key="panel_admina.*">panel_adminaController</prop>
+                <prop key="user*">userController</prop>
                 <prop key="zarzadzaj_uzytkownicy.* edytuj_uzytkownika.* usun_uzytkownika.*">zarzadzaj_uzytkownikamiController</prop>
                 <prop key="zarzadzaj_zajecia.* edytuj_zajecia.* usun_zajecia.*">zarzadzaj_zajeciamiController</prop>
             </props>
@@ -55,6 +56,9 @@
     <bean name="loginController"
         class="org.springframework.web.servlet.mvc.ParameterizableViewController"
         p:viewName="login"/>
+    <bean name="userController"
+        class="org.springframework.web.servlet.mvc.ParameterizableViewController"
+        p:viewName="user_rezerwacja"/>
 
     <bean name="grafikController"
         class="org.springframework.web.servlet.mvc.ParameterizableViewController"

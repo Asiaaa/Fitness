@@ -33,7 +33,7 @@
             <a href="login.htm">Logowanie</a>  
             </security:authorize>
             <security:authorize access="hasRole('ROLE_USER')">
-            <a href="<c:url value='/user' />">Moje konto</a> | 
+            <a href="<c:url value='/user_rezerwacja.htm' />">Moje zajęcia</a> | 
             </security:authorize>
             <security:authorize access="hasRole('ROLE_ADMIN')">
             <a href="<c:url value='/admin' />">Panel administratora</a> | 
