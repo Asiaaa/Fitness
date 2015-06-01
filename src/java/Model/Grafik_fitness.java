@@ -8,12 +8,11 @@ package Model;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.ArrayList;
 import java.util.List;
 import javax.sql.DataSource;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
+import java.security.Principal;
 
 /**
  *
@@ -147,5 +146,24 @@ public class Grafik_fitness {
         return this.zajecia;
     }
     
+    public List<Grafik_fitness> wyswietlGrafikUzytkownika(String login){
+        List<Grafik_fitness> grafik = this.jdbcTemplate.query(
+        "select grafik_fitness_view.* from grafik_fitness_view, uzytkownik where grafik_fitness_view.id_instruktor=uzytkownik.id_uzytkownik and uzytkownik.login=?",
+                new Object [] {login},
+        new RowMapper<Grafik_fitness>() {
+            @Override
+            public Grafik_fitness mapRow(ResultSet rs, int rowNum) throws SQLException {
+                Grafik_fitness user = new Grafik_fitness();
+                user.setIdSala(rs.getInt("id_sala"));
+                user.setIdInstruktor(rs.getInt("id_instruktor"));
+                user.setGodzStart(rs.getInt("godz_start"));
+                user.setGodzKoniec(rs.getInt("godz_koniec"));
+                user.setIdDzienTygodnia(rs.getInt("id_dzien_tygodnia"));
+                user.setZajecia(rs.getString("nazwa"));
+                return user;
+            }
+        });
+        return grafik;
+    }
 }
     

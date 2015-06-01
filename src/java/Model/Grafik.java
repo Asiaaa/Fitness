@@ -118,4 +118,25 @@ public class Grafik {
         return grafik;
     }
     
+    public List<Grafik> wyswietlGrafikUzytkownika(String login){
+        List<Grafik> grafik = this.jdbcTemplate.query(
+        "select gs.* from grafik_silownia_view gs, uzytkownik u\n" +
+        "where \n" +
+        "gs.imie = u.imie and\n" +
+        "gs.nazwisko = u.nazwisko and\n" +
+        "u.login = ?;",
+                new Object [] {login},
+        new RowMapper<Grafik>() {
+            @Override
+            public Grafik mapRow(ResultSet rs, int rowNum) throws SQLException {
+                Grafik user = new Grafik();
+                user.setGodzStart(rs.getInt("godz_start_dyzur"));
+                user.setGodzEnd(rs.getInt("godz_koniec_dyzur"));
+                user.setIdDzienTygodnia(rs.getInt("id_dzien_tygodnia"));
+                return user;
+            }
+        });
+        return grafik;
+    }
+    
 }
