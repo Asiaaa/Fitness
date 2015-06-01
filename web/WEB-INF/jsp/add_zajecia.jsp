@@ -1,27 +1,27 @@
 <%-- 
-    Document   : edit_zajecia
-    Created on : 2015-05-31, 21:36:12
+    Document   : add_zajecia
+    Created on : 2015-06-01, 18:54:25
     Author     : Joanna
 --%>
 
 <%@include file="header.jsp" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>   
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>  
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Edytuj zajecia</title>
+        <title>Dodaj zajęcia</title>
     </head>
     <body>
         <div id="context">
     <div id="con_left">
         
         <div id="formularz" style="margin-left: 50px">
-            <h2>Edycja ${command.nazwa}</h2>
+            <h2>Dodaj</h2>
        <table>
-           <form:form method="POST" action="" commandName="command">
+           <form:form method="POST" action="add_zajecia.htm">
             <tr><td><form:label path="nazwa">Nazwa: </form:label> </td><td><form:input path="nazwa" /></td></tr>
             <tr><td><form:label path="czasTrwania">Czas trwania: </form:label></td><td><form:input path="czasTrwania" /></td></tr>
             <tr><td><form:label path="idStopienTrudnosci">Stopien trudnosci: </form:label></td><td><form:select path="idStopienTrudnosci" items="${stopnie}" ></form:select></td></tr>

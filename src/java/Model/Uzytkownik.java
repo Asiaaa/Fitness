@@ -234,13 +234,14 @@ public class Uzytkownik {
     
     public List<Uzytkownik> getAllKadra(){
         List<Uzytkownik> users = this.jdbcTemplate.query(
-        "select imie, nazwisko, id_uzytkownik from instruktorzy_view",
+        "select imie, nazwisko, opis, id_uzytkownik from instruktorzy_view",
         new RowMapper<Uzytkownik>() {
             @Override
             public Uzytkownik mapRow(ResultSet rs, int rowNum) throws SQLException {
                 Uzytkownik user = new Uzytkownik();
                 user.setImie(rs.getString("imie"));
                 user.setNazwisko(rs.getString("nazwisko"));
+                user.setOpis(rs.getString("opis"));
                 user.setIdUzytkownik(rs.getInt("id_uzytkownik"));
                 return user;
             }

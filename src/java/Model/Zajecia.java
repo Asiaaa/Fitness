@@ -91,18 +91,8 @@ public class Zajecia {
         return this.stopien_trudnosci;
     }
     
-    public void setIdZajecia(int Id){
-        this.id_zajecia=Id;
-    }
-    public int getIdZajecia(){
-        return this.id_zajecia;
-    }
-    
     public void setStopienTrudnosci(int st){
         this.id_stopien_trudnosci=st;
-    }
-    public int getStopienTrudnosci(){
-        return this.id_stopien_trudnosci;
     }
     
     public void setStopien(String stopien)
@@ -148,6 +138,7 @@ public class Zajecia {
                 public Zajecia mapRow(ResultSet rs, int rowNum) throws SQLException {
                 Zajecia zajecia = new Zajecia();
                 zajecia.id_zajecia=rs.getInt("id_zajecia");
+                zajecia.setIdStopienTrudnosci(rs.getInt("z.id_stopien_trudnosci"));
                 zajecia.setNazwa(rs.getString("z.nazwa"));
                 zajecia.setCzasTrwania(rs.getTime("czas_trwania"));
                 zajecia.setStopien(rs.getString("s.nazwa"));
@@ -185,7 +176,7 @@ public class Zajecia {
                 zajecia.id_zajecia=rs.getInt("id_zajecia");
                 zajecia.setNazwa(rs.getString("nazwa"));
                 zajecia.setCzasTrwania(rs.getTime("czas_trwania"));
-                zajecia.setStopien(rs.getString("stopien_trudnosci"));
+                zajecia.setStopienTrudnosci(rs.getString("stopien_trudnosci"));
                 zajecia.setOpis(rs.getString("opis"));
                 return zajecia;
             }

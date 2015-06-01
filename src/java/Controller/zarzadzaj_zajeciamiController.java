@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 /**
  *
@@ -32,7 +33,7 @@ public class zarzadzaj_zajeciamiController {
     private DataSource dataSource;
     
     @RequestMapping(value = "/zarzadzaj_zajecia.htm", method = RequestMethod.GET)
-   public String student(ModelMap model) {
+   public String zajecia(ModelMap model) {
        Zajecia zajecia = new Zajecia();
        zajecia.setDataSource(dataSource);
        model.addAttribute("zajecia", zajecia.WyswietlZajecia());
@@ -49,7 +50,7 @@ public class zarzadzaj_zajeciamiController {
        Map <String, String> st = new LinkedHashMap<String, String>();
        for(Zajecia tmp: stopnie)
        {
-           st.put(String.valueOf(tmp.getStopienTrudnosci()), tmp.getStopien());
+           st.put(String.valueOf(tmp.getIdStopienTrudnosci()), tmp.getStopien());
        }
        model.put("stopnie", st);
        return new ModelAndView("edit_zajecia", model);
@@ -70,4 +71,36 @@ public class zarzadzaj_zajeciamiController {
        zajecia.UsunZajecia(id);
        return "redirect:/zarzadzaj_zajecia.htm";
    }
+   
+    /*@RequestMapping(value = "/dodaj_zajecia.htm", method = RequestMethod.GET)
+   public ModelAndView dodajZajecia() {
+      return new ModelAndView("add_zajecia", "command", new Zajecia());
+   }*/
+   
+   @RequestMapping(value = "/dodaj_zajecia.htm", method = RequestMethod.GET)
+   public ModelAndView dodajZajecia() {
+       Zajecia zajecia = new Zajecia();
+       zajecia.setDataSource(dataSource);
+       Map<String, Object> model = new HashMap<String, Object>();
+       model.put("command", new Zajecia());
+       List <Zajecia> stopnie = zajecia.PobierzStopnie();
+       Map <String, String> st = new LinkedHashMap<String, String>();
+       for(Zajecia tmp: stopnie)
+       {
+           st.put(String.valueOf(tmp.getIdStopienTrudnosci()), tmp.getStopien());
+           System.out.println(tmp.getIdStopienTrudnosci()+"hello");
+       }
+       model.put("stopnie", st);
+       return new ModelAndView("add_zajecia", model);
+   }
+   
+   @RequestMapping(value = "/add_zajecia.htm", method = RequestMethod.POST)
+   public String addZajecia(@ModelAttribute("SpringWeb")Zajecia zajecia, 
+    final RedirectAttributes redirectAttributes) {
+      zajecia.setDataSource(dataSource);
+      System.out.print("hello...");
+      zajecia.DodajZajecia();
+      redirectAttributes.addFlashAttribute("message", "Dodano!");
+      return "redirect:/zarzadzaj_zajecia.htm";
+   }  
 }

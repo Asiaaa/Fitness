@@ -25,7 +25,7 @@
             <c:forEach items="${zajecia}" var="i">
                 <tr><td>${i.nazwa}</td>
                     <td>${i.czasTrwania}</td>
-                    <td>${i.nazwa}</td>
+                    <td>${i.stopien}</td>
                     <td>${i.opis}</td>
                     <td><a href="<c:url value="/edytuj_zajecia.htm?id=${i.id}"/>"><i class="fa fa-pencil-square-o"></i></a></td>
                     <td><a href="<c:url value="/usun_zajecia.htm?id=${i.id}"/>"><i class="fa fa-times"></i></a></td>
@@ -33,6 +33,9 @@
             </c:forEach>
         </c:if>
             </table>
+            <div id="zarzadzanko">
+                <a href="<c:url value="/dodaj_zajecia.htm"/>">DODAJ ZAJĘCIA</a>
+            </div>
         </div>
     </body>
 </html>

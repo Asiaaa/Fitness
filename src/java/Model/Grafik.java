@@ -68,6 +68,11 @@ public class Grafik {
         this.id_dzien_tygodnia=dzien_tygodnia;
     }
     
+    public int getIdDzienTygodnia()
+    {
+        return id_dzien_tygodnia;
+    }
+    
     public int getDzienTygodnia()
     {
         return id_dzien_tygodnia;
@@ -85,6 +90,7 @@ public class Grafik {
    }
     */
     
+    
     public String imie;
     public void setImie(String imie){
         this.imie = imie;
@@ -100,6 +106,23 @@ public class Grafik {
     public String getNazwisko(){
         return this.nazwisko;
     }
+    
+    public String dzien_tygodnia;
+    public void setDzienTygodnia(String d)
+    {
+        this.dzien_tygodnia=d;
+    }
+    public String getDdzienTygodnia()
+    {
+        return dzien_tygodnia;
+    }
+    
+    public int getId()
+    {
+       return id_grafik;
+    }
+ 
+                    
     public List<Grafik> WyswietlGrafik(){
         List<Grafik> grafik = this.jdbcTemplate.query(
         "select * from grafik_silownia_view",
@@ -107,6 +130,9 @@ public class Grafik {
             @Override
             public Grafik mapRow(ResultSet rs, int rowNum) throws SQLException {
                 Grafik gf = new Grafik();
+                gf.id_grafik=rs.getInt("id_grafik_silownia");
+                gf.setDzienTygodnia(rs.getString("nazwa"));
+                gf.setIdInstruktor(rs.getInt("id_uzytkownik"));
                 gf.setGodzStart(rs.getInt("godz_start_dyzur"));
                 gf.setGodzEnd(rs.getInt("godz_koniec_dyzur"));
                 gf.setIdDzienTygodnia(rs.getInt("id_dzien_tygodnia"));
@@ -117,6 +143,57 @@ public class Grafik {
         });
         return grafik;
     }
+    
+    public Grafik WyswietlGrafikId(int id)
+    {
+         Grafik grafik = (Grafik)this.jdbcTemplate.queryForObject(
+        "select * from grafik_silownia_view where id_grafik_silownia=?", new Object[] {id},
+        new RowMapper<Grafik>() {
+            @Override
+            public Grafik mapRow(ResultSet rs, int rowNum) throws SQLException {
+                Grafik gf = new Grafik();
+                gf.setDzienTygodnia(rs.getString("nazwa"));
+                gf.setIdInstruktor(rs.getInt("id_uzytkownik"));
+                gf.setGodzStart(rs.getInt("godz_start_dyzur"));
+                gf.setGodzEnd(rs.getInt("godz_koniec_dyzur"));
+                gf.setIdDzienTygodnia(rs.getInt("id_dzien_tygodnia"));
+                gf.setNazwisko(rs.getString("nazwisko"));
+                gf.setImie(rs.getString("imie"));
+                return gf;
+            }
+        });
+        return grafik;
+    }
+    
+    public List<Grafik> PobierzDniTygodnia()
+    {
+        List<Grafik> grafikk = this.jdbcTemplate.query(
+        "select id_dzien_tygodnia, nazwa from dni_tygodnia",
+        new RowMapper<Grafik>() {
+                @Override
+                public Grafik mapRow(ResultSet rs, int rowNum) throws SQLException {
+                Grafik grafik = new Grafik();
+                grafik.setIdDzienTygodnia(rs.getInt("id_dzien_tygodnia"));
+                grafik.setDzienTygodnia(rs.getString("nazwa"));
+                return grafik;
+            }
+        });
+        return grafikk;
+    }
+    
+    public void EdytujGrafik(int id)
+    {
+        jdbcTemplate.update("UPDATE GRAFIK_SILOWNIA SET ID_DZIEN_TYGODNIA=?, GODZ_START_DYZUR=?, GODZ_KONIEC_DYZUR=? "
+                + "WHERE ID_GRAFIK_SILOWNIA=?",
+        new Object[] { id_dzien_tygodnia, godz_start, godz_end, id});
+    }
+    
+    public void UsunGrafik(int id)
+    {
+        jdbcTemplate.update("DELETE FROM GRAFIK_SILOWNIA WHERE ID_GRAFIK_SILOWNIA=?", new Object[] {id});
+    }
+    
+    
     
     public List<Grafik> wyswietlGrafikUzytkownika(String login){
         List<Grafik> grafik = this.jdbcTemplate.query(

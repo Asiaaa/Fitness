@@ -1,6 +1,6 @@
 <%-- 
-    Document   : edit_zajecia
-    Created on : 2015-05-31, 21:36:12
+    Document   : edit_grafik_silownia
+    Created on : 2015-06-01, 22:26:46
     Author     : Joanna
 --%>
 
@@ -12,20 +12,19 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Edytuj zajecia</title>
+        <title>Edytuj grafik silowni</title>
     </head>
     <body>
         <div id="context">
     <div id="con_left">
         
         <div id="formularz" style="margin-left: 50px">
-            <h2>Edycja ${command.nazwa}</h2>
+            <h2>Edycja ${command.imie} ${command.nazwisko} </h2>
        <table>
            <form:form method="POST" action="" commandName="command">
-            <tr><td><form:label path="nazwa">Nazwa: </form:label> </td><td><form:input path="nazwa" /></td></tr>
-            <tr><td><form:label path="czasTrwania">Czas trwania: </form:label></td><td><form:input path="czasTrwania" /></td></tr>
-            <tr><td><form:label path="idStopienTrudnosci">Stopien trudnosci: </form:label></td><td><form:select path="idStopienTrudnosci" items="${stopnie}" ></form:select></td></tr>
-            <tr><td><form:label path="opis">Opis: </form:label></td><td><form:input path="opis" /></td></tr>
+             <tr><td><form:label path="godzStart">Godzina rozpoczecia: </form:label> </td><td><form:input path="godzStart" /></td></tr> 
+            <tr><td><form:label path="godzEnd">Godzina zakończenia: </form:label></td><td><form:input path="godzEnd" /></td></tr>
+            <tr><td><form:label path="idDzienTygodnia">Dzień tygodnia: </form:label></td><td><form:select path="idDzienTygodnia" items="${dni}" ></form:select></td></tr>
             <tr><td><input type="submit" value="Wyślij" /></td></tr>
          </form:form>
         </table>

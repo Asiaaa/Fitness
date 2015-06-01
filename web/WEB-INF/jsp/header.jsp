@@ -36,10 +36,10 @@
             <a href="<c:url value='/user' />">Moje konto</a> | 
             </security:authorize>
             <security:authorize access="hasRole('ROLE_ADMIN')">
-            <a href="<c:url value='/admin' />">Panel administratora</a> | 
+            <a href="<c:url value='/panel_admina.htm' />">Panel administratora</a> | 
             </security:authorize>
             <security:authorize access="hasRole('ROLE_STAFF')">
-            <a href="<c:url value='/panel_admina.htm' />">Zarządzaj</a> | 
+            <a href="<c:url value='/panel_pracownika.htm' />">Zarządzaj</a> | 
             </security:authorize>
              <security:authorize access="hasRole('ROLE_INSTRUCTOR')">
             <a href="<c:url value='/grafik_moj.htm' />">Mój grafik</a> | 

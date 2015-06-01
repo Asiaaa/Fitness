@@ -29,8 +29,11 @@
                 <prop key="kadra*">kadraController</prop>
                 <prop key="zajecia*">zajeciaController</prop>
                 <prop key="panel_admina.*">panel_adminaController</prop>
+                <prop key="panel_pracownika.*">panel_pracownikaController</prop>
                 <prop key="zarzadzaj_uzytkownicy.* edytuj_uzytkownika.* usun_uzytkownika.*">zarzadzaj_uzytkownikamiController</prop>
                 <prop key="zarzadzaj_zajecia.* edytuj_zajecia.* usun_zajecia.*">zarzadzaj_zajeciamiController</prop>
+                <prop key="zarzadzaj_grafik_silownia.* edytuj_grafik_silownia.* usun_grafik_silownia.*">grafik_silowniaController</prop>
+                <prop key="zarzadzaj_grafik_fitness.* edytuj_grafik_fitness.* usun_grafik_fitness.*">grafik_silowniaController</prop>
             </props>
         </property>
     </bean>
@@ -62,12 +65,21 @@
     <bean name="panel_adminaController"
         class="org.springframework.web.servlet.mvc.ParameterizableViewController"
         p:viewName="panel_admina"/>
+    <bean name="panel_pracownikaController"
+        class="org.springframework.web.servlet.mvc.ParameterizableViewController"
+        p:viewName="panel_pracownika"/>
     <bean name="zarzadzaj_uzytkownikamiController"
         class="org.springframework.web.servlet.mvc.ParameterizableViewController"
         p:viewName="zarzadzaj_uzytkownicy"/>
     <bean name="zarzadzaj_zajeciamiController"
         class="org.springframework.web.servlet.mvc.ParameterizableViewController"
         p:viewName="zarzadzaj_zajecia"/>
+    <bean name="grafik_silowniaController"
+        class="org.springframework.web.servlet.mvc.ParameterizableViewController"
+        p:viewName="zarzadzaj_grafik_silownia"/>
+    <bean name="grafik_fitnessController"
+        class="org.springframework.web.servlet.mvc.ParameterizableViewController"
+        p:viewName="zarzadzaj_grafik_fitness"/>
 
 </beans>
 

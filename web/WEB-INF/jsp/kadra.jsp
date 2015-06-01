@@ -5,7 +5,7 @@
     <h2>Nasz zespół</h2>
     <c:forEach items="${userLista}" var="instruktor">
         <c:out value="${instruktor.getImie()}"/>
-        <c:out value="${instruktor.getNazwisko()}"/>
+        <c:out value="${instruktor.getNazwisko()}"/><br>
         <c:out value="${instruktor.getOpis()}"/>
         <c:forEach items="${grafikLista}" var="zajecia">
             <ul>
