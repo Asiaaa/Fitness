@@ -38,6 +38,14 @@ public class Grafik_fitness {
         this.dataSource=dataSource;
         this.jdbcTemplate = new JdbcTemplate(this.dataSource);
     }
+    
+    public void setIdGrafikFitness(int id){
+        this.id_grafik_fitness = id;
+    }
+    
+    public int getIdGrafikFitness(){
+        return this.id_grafik_fitness;
+    }
    
     public void setIdZajecia(int id_zajecia)
     {
@@ -76,6 +84,7 @@ public class Grafik_fitness {
             @Override
             public Grafik_fitness mapRow(ResultSet rs, int rowNum) throws SQLException {
                 Grafik_fitness user = new Grafik_fitness();
+                user.setIdGrafikFitness(rs.getInt("id_grafik_fitness"));
                 user.setIdSala(rs.getInt("id_sala"));
                 user.setIdInstruktor(rs.getInt("id_instruktor"));
                 user.setGodzStart(rs.getInt("godz_start"));
@@ -154,6 +163,7 @@ public class Grafik_fitness {
             @Override
             public Grafik_fitness mapRow(ResultSet rs, int rowNum) throws SQLException {
                 Grafik_fitness user = new Grafik_fitness();
+                
                 user.setIdSala(rs.getInt("id_sala"));
                 user.setIdInstruktor(rs.getInt("id_instruktor"));
                 user.setGodzStart(rs.getInt("godz_start"));
