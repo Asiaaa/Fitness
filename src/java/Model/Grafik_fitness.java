@@ -116,7 +116,7 @@ public class Grafik_fitness{
     
     public List<Grafik_fitness> getAll(){
         List<Grafik_fitness> grafik = this.jdbcTemplate.query(
-        "select * from grafik_fitness_view",
+        "select gf.*, d.nazwa dzien_tygodnia from grafik_fitness_view gf, dni_tygodnia d where gf.id_dzien_tygodnia=d.id_dzien_tygodnia order by gf.nazwa",
         new RowMapper<Grafik_fitness>() {
             @Override
             public Grafik_fitness mapRow(ResultSet rs, int rowNum) throws SQLException {
@@ -128,6 +128,7 @@ public class Grafik_fitness{
                 user.setGodzKoniec(rs.getInt("godz_koniec"));
                 user.setIdDzienTygodnia(rs.getInt("id_dzien_tygodnia"));
                 user.setZajecia(rs.getString("nazwa"));
+                user.setDzienTygodnia(rs.getString("dzien_tygodnia"));
                 return user;
             }
         });
@@ -267,6 +268,13 @@ public class Grafik_fitness{
         return this.zajecia;
     }
     
+    
+   /* public void setDzienTygodnia(String dzien){
+        this.dzien_tygodnia = dzien;
+    }
+    public String getDzienTygodnia(){
+        return this.dzien_tygodnia;
+    }*/
     
     public List<Grafik_fitness> wyswietlGrafikUzytkownika(String login){
         List<Grafik_fitness> grafik = this.jdbcTemplate.query(

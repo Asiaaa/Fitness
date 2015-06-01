@@ -91,9 +91,22 @@ public class Zajecia {
         return this.stopien_trudnosci;
     }
     
+
+//    public void setIdZajecia(int Id){
+//        this.id_zajecia=Id;
+//    }
+//    public int getIdZajecia(){
+//        return this.id_zajecia;
+//    }
+    
+
     public void setStopienTrudnosci(int st){
         this.id_stopien_trudnosci=st;
     }
+
+//    public int getStopienTrudnosci(){
+//        return this.id_stopien_trudnosci;
+//    }
     
     public void setStopien(String stopien)
     {
