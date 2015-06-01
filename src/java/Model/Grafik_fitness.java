@@ -276,6 +276,13 @@ public class Grafik_fitness{
         return this.dzien_tygodnia;
     }*/
     
+    /*public void setDzienTygodnia(String dzien){
+        this.dzien_tygodnia = dzien;
+    }
+    public String getDzienTygodnia(){
+        return this.dzien_tygodnia;
+    }*/
+    
     public List<Grafik_fitness> wyswietlGrafikUzytkownika(String login){
         List<Grafik_fitness> grafik = this.jdbcTemplate.query(
         "select grafik_fitness_view.* from grafik_fitness_view, uzytkownik where grafik_fitness_view.id_instruktor=uzytkownik.id_uzytkownik and uzytkownik.login=?",

@@ -91,7 +91,6 @@ public class Zajecia {
         return this.stopien_trudnosci;
     }
     
-
 //    public void setIdZajecia(int Id){
 //        this.id_zajecia=Id;
 //    }
